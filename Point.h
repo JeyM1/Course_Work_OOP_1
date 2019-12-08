@@ -1,7 +1,7 @@
 #ifndef COURSE_WORK_OOP_1_POINT_H
 #define COURSE_WORK_OOP_1_POINT_H
 
-
+#include <iostream>
 #include "Object.h"
 
 
@@ -19,6 +19,11 @@ public:
     int getY() const;
     void setX(int x);
     void setY(int y);
+
+    friend std::ostream& operator<<(std::ostream&, const Point&);
+    Point operator +(const Point&) const;
+    Point operator /(const Point&) const;
+    Point operator /(int) const;
 };
 
 

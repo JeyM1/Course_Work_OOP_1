@@ -13,10 +13,15 @@ protected:
 public:
     Figure();
     explicit Figure(double mSquare);
-    explicit Figure(e_FigureNames names);
-    Figure(int x, int y, e_FigureNames names);
+    explicit Figure(e_FigureNames name);
+    Figure(int x, int y, e_FigureNames name);
     Figure(int x, int y, double square);
     Figure(int x, int y);
+    Figure(const Point& point, e_FigureNames name);
+
+    Figure(int x, int y, e_FigureNames names, double mSquare);
+
+    Figure(const Figure&);
 
     double getSquare() const;
     void setSquare(double mSquare);
