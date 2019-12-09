@@ -15,7 +15,7 @@ double Circle::getRadius() const { return m_radius; }
 void Circle::setRadius(double radius) { m_radius = radius; }
 
 std::ostream &operator<<(std::ostream& out, const Circle& obj) {
-    out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name() << " "  << obj.m_radius;
+    out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.m_radius;
     return out;
 }
 
