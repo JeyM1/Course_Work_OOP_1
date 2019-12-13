@@ -18,10 +18,10 @@ public:
     Figure(int x, int y, double square);
     Figure(int x, int y);
     Figure(const Point& point, e_FigureNames name);
-
+    Figure(e_FigureNames name, double square);
     Figure(int x, int y, e_FigureNames names, double mSquare);
-
     Figure(const Figure&);
+    ~Figure() override;
 
     double getSquare() const;
     void setSquare(double mSquare);

@@ -5,7 +5,7 @@
 #include "Figure.h"
 
 class Triangle : public Figure {
-protected:
+public:
     class Points{
     public:
         Point A;
@@ -16,13 +16,16 @@ protected:
         friend std::ostream& operator<<(std::ostream& out, const Points& obj){
             return out << obj.A << " " << obj.B << " " << obj.C;
         }
-    } m_points;
-
+    };
+protected:
+    Points m_points;
 public:
     Triangle();
     Triangle(const Point& top, const Point& left, const Point& right);
+    ~Triangle() override;
+
     Points getPoints() const;
-    void setPoints(const Points& Points);
+    void setPoints(const Points& points);
 
     friend std::ostream& operator<<(std::ostream&, const Triangle&);
 };

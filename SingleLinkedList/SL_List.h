@@ -9,9 +9,10 @@ template <class T>
 class SL_List {
     SL_List_Node<T>* head;
     SL_List_Node<T>* tail;
-    unsigned int lenght;
+protected:
+    size_t length;
 public:
-    SL_List() : lenght(0), head(), tail() {}
+    SL_List() : length(0), head(), tail() {}
     SL_List(SL_List<T>&);
     explicit SL_List(T*);
 
@@ -20,9 +21,13 @@ public:
     void setHead(SL_List_Node<T> *head) { this->head = head; }
     void setTail(const SL_List_Node<T> *tail) { this->tail = tail; }
 
-    unsigned int size() const { return lenght; }
+    size_t size() const { return length; }
     void pop(int idx=-1);
     void push_back(T);
+    void insert(int, T);
+    void swap(int, int);
+    void bubble_sort();
+    SL_List_Node<T>* getNode(int);
     T* toArray();
 
     T& operator[](int idx);
@@ -32,13 +37,13 @@ public:
 };
 
 template<class T>
-SL_List<T>::SL_List(SL_List<T>& obj) : lenght(obj.lenght) {
+SL_List<T>::SL_List(SL_List<T>& obj) : length(obj.length) {
     SL_List<T> ret;
     head = new SL_List_Node<T>;
     head->data = obj.head->data;
     SL_List_Node<T>* tmp1 = this->head;
     SL_List_Node<T>* tmp2 = obj.head;
-    for(int i = 1; i < obj.lenght; i++){
+    for(int i = 1; i < obj.length; i++){
         tmp1->next = new SL_List_Node<T>;
         tmp1->next->data = tmp2->next->data;
         tmp1 = tmp1->next;
@@ -48,10 +53,10 @@ SL_List<T>::SL_List(SL_List<T>& obj) : lenght(obj.lenght) {
 }
 
 template<class T>
-SL_List<T>::SL_List(T* list) : lenght(sizeof(list)) {
+SL_List<T>::SL_List(T* list) : length(sizeof(list)) {
     head = new SL_List_Node<T>(list[0]);
     SL_List_Node<T>* tmp = head;
-    for(int i = 1; i < lenght; i++){
+    for(int i = 1; i < length; i++){
         tmp->next = new SL_List_Node<T>(list[i]);
         tmp = tmp->next;
     }
@@ -60,9 +65,9 @@ SL_List<T>::SL_List(T* list) : lenght(sizeof(list)) {
 
 template<class T>
 T* SL_List<T>::toArray() {
-   T* ret = new T[lenght]();
+   T* ret = new T[length]();
    SL_List_Node<T>* tmp = this->head;
-   for(int i = 0; i < lenght; i++){
+   for(int i = 0; i < length; i++){
        ret[i] = tmp->data;
        tmp = tmp->next;
    }
@@ -84,33 +89,31 @@ void SL_List<T>::push_back(T data) {
         this->head = new SL_List_Node<T>(data);
         this->head->next = nullptr;
         this->tail = this->head;
-        lenght = 1;
+        length = 1;
         return;
     }
     this->tail->next = new SL_List_Node<T>(data);
     this->tail = this->tail->next;
-    lenght++;
+    length++;
 }
-
-
 template<class T>
 void SL_List<T>::pop(int idx) {
     if(!idx){
         SL_List_Node<T>* newhead = head->next;
         delete(this->head);
         this->head = newhead;
-        lenght--;
+        length--;
         return;
     }
     if(idx == -1){
         SL_List_Node<T>* prev = head;
-        for(int i = 0; i < lenght - 2; i++){
+        for(int i = 0; i < length - 2; i++){
             prev = prev->next;
         }
         delete(tail);
         tail = prev;
         tail->next = nullptr;
-        lenght--;
+        length--;
         return;
     }
     SL_List_Node<T>* tmp = head;
@@ -121,14 +124,14 @@ void SL_List<T>::pop(int idx) {
     }
     prev->next = tmp->next;
     delete(tmp);
-    lenght--;
+    length--;
 }
 
 template<class U>
 std::ostream &operator<<(std::ostream &os, const SL_List<U> &list) {
         os << "[";
         SL_List_Node<U>* tmp = list.head;
-        for(int i = 0; i < list.lenght - 1; i++){
+        for(int i = 0; i < list.length - 1; i++){
             os << tmp->data << ", ";
             tmp = tmp->next;
         }
@@ -138,13 +141,13 @@ std::ostream &operator<<(std::ostream &os, const SL_List<U> &list) {
 
 template<class T>
 SL_List<T> &SL_List<T>::operator=(const SL_List &obj) {
-    this->lenght = obj.lenght;
+    this->length = obj.length;
     head = new SL_List_Node<T>;
     head->data = obj.head->data;
     //std::cout << "DEBUG: " << head->data << std::endl;
     SL_List_Node<T>* tmp1 = this->head;
     SL_List_Node<T>* tmp2 = obj.head;
-    for(int i = 1; i < obj.lenght; i++){
+    for(int i = 1; i < obj.length; i++){
         tmp1->next = new SL_List_Node<T>;
         tmp1->next->data = tmp2->next->data;
         //std::cout << "DEBUG: " << tmp1->next->data << std::endl;
@@ -153,6 +156,48 @@ SL_List<T> &SL_List<T>::operator=(const SL_List &obj) {
     }
     tail = tmp1;
     return *this;
+}
+
+template<class T>
+void SL_List<T>::insert(int index, T data) {
+    SL_List_Node<T>* iter = head;
+    for(; index > 0; index--) iter = iter->next;
+    SL_List_Node<T>* newnode = new SL_List_Node<T>(data);
+    newnode->next = iter->next;
+    iter->next = newnode;
+    length++;
+}
+
+template<class T>
+void SL_List<T>::swap(int i, int j) {
+    T tmp = this->getNode(i)->data;
+    this->getNode(i)->data = this->getNode(j)->data;
+    this->getNode(j)->data = tmp;
+}
+
+template<class T>
+SL_List_Node<T> *SL_List<T>::getNode(int index) {
+    SL_List_Node<T>* iter = head;
+    for(; index > 0; index--) iter = iter->next;
+    return iter;
+}
+
+template<class T>
+void SL_List<T>::bubble_sort() {
+    bool swapped;
+    for(int i = 0; i < length - 1; i++){
+        swapped = false;
+        for(int j = 0; j < length - i - 1; j++){
+            if(getNode(j)->data > getNode(j+1)->data) {
+
+                swap(j, j + 1);
+                swapped = true;
+            }
+        }
+        if(!swapped){
+            break;
+        }
+    }
 }
 
 

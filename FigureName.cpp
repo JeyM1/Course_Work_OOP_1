@@ -9,10 +9,10 @@ const char *FigureName::name() const {
     return FigureName::_names[m_figure_name];
 }
 
-FigureName::e_FigureNames FigureName::getMFigureName() const {
+FigureName::e_FigureNames FigureName::getFigureName() const {
     return m_figure_name;
 }
 
-void FigureName::setMFigureName(FigureName::e_FigureNames FigureName) {
-    m_figure_name = FigureName;
+void FigureName::setFigureName(FigureName::e_FigureNames mFigureName) {
+    m_figure_name = mFigureName;
 }

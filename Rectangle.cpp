@@ -5,12 +5,12 @@ Rectangle::Rectangle(double a, double b) : Figure(FigureName::Rectangle), a(a), 
     this->m_square = a * b;
 }
 Rectangle::Rectangle(int x, int y, double a, double b) : Figure(x, y, FigureName::Rectangle, a*b), a(a), b(b) {}
+Rectangle::~Rectangle() = default;
 
 std::ostream &operator<<(std::ostream& out, const Rectangle& obj) {
     out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.a << " " << obj.b;
     return out;
 }
 
-Rectangle::~Rectangle() = default;
 
 
