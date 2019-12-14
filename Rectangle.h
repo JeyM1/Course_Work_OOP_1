@@ -13,6 +13,14 @@ public:
     Rectangle(int x, int y, double a, double b);
     ~Rectangle() override;
 
+    double getA() const;
+    double getB() const;
+    void setB(double b);
+    void setA(double a);
+
+    void binary_save(std::ofstream&) override;
+    void binary_load(std::ifstream&) override;
+
     friend std::ostream& operator<<(std::ostream&, const Rectangle&);
 };
 

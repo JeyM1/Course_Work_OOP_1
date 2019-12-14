@@ -6,13 +6,14 @@
 #include "..\SingleLinkedList\SL_List.h"
 
 class TypesHandler : public SL_List<FileHandler*>, public FileHandler {
+    void init_all_types();
 protected:
     SL_List<FileHandler*(*)(std::string)> types;
 public:
-    TypesHandler() : SL_List() {};
-    ~TypesHandler() = default;;
-    void save(std::ofstream&) override;
-    void load(std::ifstream&) override;
+    TypesHandler() : SL_List() { init_all_types(); }
+    ~TypesHandler() = default;
+    void binary_save(std::ofstream&) override;
+    void binary_load(std::ifstream&) override;
     void add_load_type(FileHandler*(*callback)(std::string));
 };
 

@@ -27,6 +27,9 @@ public:
     Points getPoints() const;
     void setPoints(const Points& points);
 
+    void binary_save(std::ofstream&) override;
+    void binary_load(std::ifstream&) override;
+
     friend std::ostream& operator<<(std::ostream&, const Triangle&);
 };
 

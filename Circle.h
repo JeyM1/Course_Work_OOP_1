@@ -17,6 +17,9 @@ public:
     double getRadius() const;
     void setRadius(double);
 
+    void binary_save(std::ofstream&) override;
+    void binary_load(std::ifstream&) override;
+
     friend std::ostream& operator<<(std::ostream&, const Circle&);
 };
 

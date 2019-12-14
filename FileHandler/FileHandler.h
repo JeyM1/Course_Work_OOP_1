@@ -6,8 +6,10 @@
 
 class FileHandler {
 public:
-    virtual void save(std::ofstream&) = 0;
-    virtual void load(std::ifstream&) = 0;
+    //virtual void save(std::ofstream&) = 0;
+    //virtual void load(std::ifstream&) = 0;
+    virtual void binary_save(std::ofstream&) = 0;
+    virtual void binary_load(std::ifstream&) = 0;
 };
 
 #endif //PRACT5_6_FILEHANDLER_H

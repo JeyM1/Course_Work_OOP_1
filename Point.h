@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include "Object.h"
+#include "FileHandler/FileHandler.h"
 
 
-class Point : public Object {
+class Point : public Object, public FileHandler {
 protected:
     int x;
     int y;
@@ -19,6 +20,9 @@ public:
     int getY() const;
     void setX(int x);
     void setY(int y);
+
+    void binary_save(std::ofstream&) override;
+    void binary_load(std::ifstream&) override;
 
     friend std::ostream& operator<<(std::ostream&, const Point&);
     Point operator +(const Point&) const;

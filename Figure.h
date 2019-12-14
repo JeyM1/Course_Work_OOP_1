@@ -24,7 +24,11 @@ public:
     ~Figure() override;
 
     double getSquare() const;
+    Point getPoint();
     void setSquare(double mSquare);
+
+    void binary_save(std::ofstream&) override;
+    void binary_load(std::ifstream&) override;
 
     friend std::ostream& operator<<(std::ostream&, const Figure&);
 };

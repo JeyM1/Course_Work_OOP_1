@@ -1,12 +1,9 @@
-//
-// Created by admin on 04.12.2019.
-//
-
 #include <cstring>
 #include "TypesHandler.h"
 #include "../Exception.h"
+#include "../ArrayOfObjectsOnScreen.h"
 
-void TypesHandler::save(std::ofstream& stream) {
+void TypesHandler::binary_save(std::ofstream& stream) {
     size_t nameLength = strlen(typeid(TypesHandler).name()) + 1;
     char* name = new char[nameLength];
     strcpy(name, typeid(TypesHandler).name());
@@ -15,11 +12,11 @@ void TypesHandler::save(std::ofstream& stream) {
     delete[] name;
     stream.write((char*)&(this->length), sizeof(size_t));
     for (size_t i = 0; i < this->length; i++) {
-        this->getNode(i)->data->save(stream);
+        this->getNode(i)->data->binary_save(stream);
     }
 }
 
-void TypesHandler::load(std::ifstream& stream) {
+void TypesHandler::binary_load(std::ifstream& stream) {
     size_t nameLength = 0;
     stream.read((char*)&(nameLength), sizeof(size_t));
     char* name = new char[nameLength];
@@ -45,9 +42,10 @@ void TypesHandler::load(std::ifstream& stream) {
             }
         }
         delete[] className;
+        //cout << "DEBUG: " << (-1) * (long long)(classNameLength * sizeof(char) + sizeof(size_t)) << endl;
         stream.seekg((-1) * (long long)(classNameLength * sizeof(char) + sizeof(size_t)), ios::cur);
         if (object) {
-            object->load(stream);
+            object->binary_load(stream);
         }
         else {
             throw UnknownDataTypeException();
@@ -59,4 +57,49 @@ void TypesHandler::load(std::ifstream& stream) {
 
 void TypesHandler::add_load_type(FileHandler *(*callback)(std::string)) {
     this->types.push_back(callback);
+}
+
+void TypesHandler::init_all_types() {
+    add_load_type([](std::string name) -> FileHandler* {
+        if (name == typeid(Point).name()) {
+            return new Point();
+        }
+        return nullptr;
+    });
+    add_load_type([](std::string name) -> FileHandler* {
+        if (name == typeid(Figure).name()) {
+            return new Figure();
+        }
+        return nullptr;
+    });
+    add_load_type([](std::string name) -> FileHandler* {
+        if (name == typeid(Circle).name()) {
+            return new Circle();
+        }
+        return nullptr;
+    });
+    add_load_type([](std::string name) -> FileHandler* {
+        if (name == typeid(Triangle).name()) {
+            return new Triangle();
+        }
+        return nullptr;
+    });
+    add_load_type([](std::string name) -> FileHandler* {
+        if (name == typeid(Rectangle).name()) {
+            return new Rectangle();
+        }
+        return nullptr;
+    });
+    add_load_type([](std::string name) -> FileHandler* {
+        if (name == typeid(Ellipse).name()) {
+            return new Ellipse();
+        }
+        return nullptr;
+    });
+    add_load_type([](std::string name) -> FileHandler* {
+        if (name == typeid(ArrayOfObjectsOnScreen).name()) {
+            return new ArrayOfObjectsOnScreen();
+        }
+        return nullptr;
+    });
 }

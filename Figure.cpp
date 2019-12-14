@@ -1,4 +1,6 @@
+#include <cstring>
 #include "Figure.h"
+#include "Exception.h"
 
 Figure::Figure() : Point(), m_square(0) {}
 Figure::Figure(double square) : Point(), m_square(square) {}
@@ -15,11 +17,42 @@ Figure::~Figure() = default;
 
 double Figure::getSquare() const { return m_square; }
 void Figure::setSquare(double mSquare) { m_square = mSquare; }
+Point Figure::getPoint() {
+    return Point(this->x, this->y);
+}
 
 std::ostream &operator<<(std::ostream& out, const Figure& obj) {
     out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name();
     return out;
 }
+
+void Figure::binary_save(std::ofstream& stream) {
+    size_t nameLength = strlen(typeid(Figure).name()) + 1;
+    char* name = new char[nameLength];
+    strcpy(name, typeid(Figure).name());
+    stream.write((char*)&(nameLength), sizeof(size_t));
+    stream.write(name, nameLength * sizeof(char));
+    delete[] name;
+    Point::binary_save(stream);
+    stream.write((char*)&(this->m_square), sizeof(double));
+    stream.write((char*)&(this->m_figure_name), sizeof(e_FigureNames));
+}
+
+void Figure::binary_load(std::ifstream& stream) {
+    size_t nameLength = 0;
+    stream.read((char*)&(nameLength), sizeof(size_t));
+    char* name = new char[nameLength];
+    stream.read(name, nameLength * sizeof(char));
+    if (strcmp(name, typeid(Figure).name()) != 0) {
+        throw WrongInputFileException();
+    }
+    delete[] name;
+    Point::binary_load(stream);
+    stream.read((char*)&(this->m_square), sizeof(double));
+    stream.read((char*)&(this->m_figure_name), sizeof(e_FigureNames));
+}
+
+
 
 
 

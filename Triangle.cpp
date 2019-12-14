@@ -1,5 +1,7 @@
 #include <cmath>
+#include <cstring>
 #include "Triangle.h"
+#include "Exception.h"
 
 Triangle::Triangle() : Figure(FigureName::Triangle), m_points() {}
 Triangle::Triangle(const Point& A, const Point& B, const Point& C) : m_points(A, B, C),
@@ -19,6 +21,34 @@ void Triangle::setPoints(const Triangle::Points &points) { m_points = points; }
 std::ostream &operator<<(std::ostream& out, const Triangle& obj) {
     out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name() << " " << obj.m_points;
     return out;
+}
+
+void Triangle::binary_save(std::ofstream& stream) {
+    size_t nameLength = strlen(typeid(Triangle).name()) + 1;
+    char* name = new char[nameLength];
+    strcpy(name, typeid(Triangle).name());
+    stream.write((char*)&(nameLength), sizeof(size_t));
+    stream.write(name, nameLength * sizeof(char));
+    delete[] name;
+    Figure::binary_save(stream);
+    m_points.A.binary_save(stream);
+    m_points.B.binary_save(stream);
+    m_points.C.binary_save(stream);
+}
+
+void Triangle::binary_load(std::ifstream& stream) {
+    size_t nameLength = 0;
+    stream.read((char*)&(nameLength), sizeof(size_t));
+    char* name = new char[nameLength];
+    stream.read(name, nameLength * sizeof(char));
+    if (strcmp(name, typeid(Triangle).name()) != 0) {
+        throw WrongInputFileException();
+    }
+    delete[] name;
+    Figure::binary_load(stream);
+    m_points.A.binary_load(stream);
+    m_points.B.binary_load(stream);
+    m_points.C.binary_load(stream);
 }
 
 
