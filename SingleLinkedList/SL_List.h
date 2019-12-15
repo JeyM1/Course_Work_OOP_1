@@ -26,6 +26,7 @@ public:
     void push_back(T);
     void insert(int, T);
     void swap(int, int);
+    void clear();
     void bubble_sort();
     SL_List_Node<T>* getNode(int);
     T* toArray();
@@ -130,31 +131,34 @@ void SL_List<T>::pop(int idx) {
 template<class U>
 std::ostream &operator<<(std::ostream &os, const SL_List<U> &list) {
         os << "[";
-        SL_List_Node<U>* tmp = list.head;
-        for(int i = 0; i < list.length - 1; i++){
-            os << tmp->data << ", ";
-            tmp = tmp->next;
+        if(list.length > 0) {
+            SL_List_Node<U>* tmp = list.head;
+            for (int i = 0; i < list.length - 1; i++) {
+                os << tmp->data << ", ";
+                tmp = tmp->next;
+            }
+            os << tmp->data ;
         }
-        os << tmp->data << "]";
-        return os;
+        return os << "]";
 }
 
 template<class T>
 SL_List<T> &SL_List<T>::operator=(const SL_List &obj) {
     this->length = obj.length;
     head = new SL_List_Node<T>;
-    head->data = obj.head->data;
-    //std::cout << "DEBUG: " << head->data << std::endl;
-    SL_List_Node<T>* tmp1 = this->head;
-    SL_List_Node<T>* tmp2 = obj.head;
-    for(int i = 1; i < obj.length; i++){
-        tmp1->next = new SL_List_Node<T>;
-        tmp1->next->data = tmp2->next->data;
-        //std::cout << "DEBUG: " << tmp1->next->data << std::endl;
-        tmp1 = tmp1->next;
-        tmp2 = tmp2->next;
-    }
-    tail = tmp1;
+    if(obj.head) {
+        head->data = obj.head->data;
+        SL_List_Node<T> *tmp1 = this->head;
+        SL_List_Node<T> *tmp2 = obj.head;
+        for (int i = 1; i < obj.length; i++) {
+            tmp1->next = new SL_List_Node<T>;
+            tmp1->next->data = tmp2->next->data;
+            tmp1 = tmp1->next;
+            tmp2 = tmp2->next;
+        }
+        tail = tmp1;
+    } else
+        head = tail = nullptr;
     return *this;
 }
 
@@ -199,6 +203,5 @@ void SL_List<T>::bubble_sort() {
         }
     }
 }
-
 
 #endif //PRACT5_6_SL_LIST_H

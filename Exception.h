@@ -33,6 +33,13 @@ public:
     }
 };
 
+class CastFailedException : public Exception  {
+public:
+    string getMessage() override {
+        return string("Error: CastFailedException");
+    }
+};
+
 
 
 #endif //PRACT7_EXCEPTION_H

@@ -12,13 +12,24 @@ using std::cin;
 using std::endl;
 
 /* TODO:
+ *  Remove TypesHandler
  *  All classes - binary read/write and text read/write
  *  Program Interface */
 
 
 int main() {
-    auto main_save = new TypesHandler();
-    auto main_load = new TypesHandler();
+
+    /*Point pnt1(10, 10);
+    std::ofstream fout("text.txt");
+    pnt1.text_save(fout);
+    fout.close();
+    std::ifstream fin("text.txt");
+    Point pnt2;
+    pnt2.text_load(fin);
+    fin.close();
+    cout << pnt2 << endl;*/
+    /*auto main_save = new TypesHandler();
+    auto main_load = new TypesHandler();*/
 
     Circle circle1(1, 1, 2);
     cout << circle1 << endl;
@@ -34,20 +45,15 @@ int main() {
     main.add(&rect1);
     main.add(&ellipse1);
     cout << main.calculateAverageSquare(FigureName::Circle) << endl;
-    cout << main.calculateAveragePoint(FigureName::Circle) << endl;
+    cout << "!!!" << main.calculateAveragePoint(FigureName::Circle) << endl;
 
     std::ofstream fout("objects.dat", std::ios::binary);
-    /*main_save->push_back(&circle1);
-    main_save->push_back(&triangle1);
-    main_save->push_back(&rect1);
-    main_save->push_back(&ellipse1);*/
-    main_save->push_back(&main);
-    main_save->binary_save(fout);
+    main.binary_save(fout);
     fout.close();
+    main.clear();
+    //cout << main << endl;
     std::ifstream fin("objects.dat", std::ios::binary);
-    main_load->binary_load(fin);
-    ArrayOfObjectsOnScreen main2 = *dynamic_cast<ArrayOfObjectsOnScreen*>(main_load->getNode(0)->data);
+    main.binary_load(fin);
     cout << main << endl;
-    cout << main2 << endl;
     return 0;
 }

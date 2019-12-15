@@ -89,9 +89,9 @@ void ArrayOfObjectsOnScreen::binary_load(std::ifstream& stream) {
         stream.read((char*)&(classNameLength), sizeof(size_t));
         char* className = new char[classNameLength];
         stream.read(className, classNameLength * sizeof(char));
-        Figure* _object = nullptr;
+        FileHandler* _object = nullptr;
         for (size_t j = 0; j < this->types.size(); j++) {
-            Figure* temp = this->types[j](string(className));
+            FileHandler* temp = this->types[j](string(className));
             if (temp) {
                 _object = temp;
                 break;
@@ -105,35 +105,39 @@ void ArrayOfObjectsOnScreen::binary_load(std::ifstream& stream) {
         else {
             throw UnknownDataTypeException();
         }
-        this->m_figures.push_back(_object);
+        this->m_figures.push_back(dynamic_cast<Figure *>(_object));
     }
 }
 
 void ArrayOfObjectsOnScreen::init_all_types() {
-    types.push_back([](std::string name) -> Figure* {
+    types.push_back([](std::string name) -> FileHandler* {
         if (name == typeid(Circle).name()) {
             return new Circle();
         }
         return nullptr;
     });
-    types.push_back([](std::string name) -> Figure* {
+    types.push_back([](std::string name) -> FileHandler* {
         if (name == typeid(Triangle).name()) {
             return new Triangle();
         }
         return nullptr;
     });
-    types.push_back([](std::string name) -> Figure* {
+    types.push_back([](std::string name) -> FileHandler* {
         if (name == typeid(Rectangle).name()) {
             return new Rectangle();
         }
         return nullptr;
     });
-    types.push_back([](std::string name) -> Figure* {
+    types.push_back([](std::string name) -> FileHandler* {
         if (name == typeid(Ellipse).name()) {
             return new Ellipse();
         }
         return nullptr;
     });
+}
+
+void ArrayOfObjectsOnScreen::add_load_type(FileHandler *(*callback)(std::string)) {
+    this->types.push_back(callback);
 }
 
 std::ostream &operator<<(std::ostream& out, ArrayOfObjectsOnScreen& obj) {
@@ -143,3 +147,18 @@ std::ostream &operator<<(std::ostream& out, ArrayOfObjectsOnScreen& obj) {
     }
     return out;
 }
+
+void ArrayOfObjectsOnScreen::clear() {
+    this->m_figures = SL_List<Figure*>();
+    this->x = 0;
+    this->y = 0;
+}
+
+Figure *ArrayOfObjectsOnScreen::operator[](int i) {
+    return m_figures[i];
+}
+
+size_t ArrayOfObjectsOnScreen::size() {
+    return m_figures.size();
+}
+

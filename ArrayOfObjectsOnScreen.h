@@ -11,20 +11,24 @@
 
 class ArrayOfObjectsOnScreen : public Point {
     SL_List<Figure*> m_figures;
-    SL_List<Figure*(*)(std::string)> types;
+    SL_List<FileHandler*(*)(std::string)> types;
     void init_all_types();
 public:
     ArrayOfObjectsOnScreen();
     explicit ArrayOfObjectsOnScreen(SL_List<Figure*>&);
     void add(int idx, Figure*);
     void add(Figure*);
+    void clear();
+    size_t size();
     double calculateAverageSquare(FigureName::e_FigureNames name = FigureName::Figure);
     Point calculateAveragePoint(FigureName::e_FigureNames name = FigureName::Figure);
 
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
+    void add_load_type(FileHandler*(*callback)(std::string));
 
     friend std::ostream& operator<<(std::ostream&, ArrayOfObjectsOnScreen&);
+    Figure*operator[](int i);
 };
 
 
