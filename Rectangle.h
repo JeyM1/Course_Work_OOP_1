@@ -7,6 +7,7 @@
 class Rectangle : public Figure {
     double a;
     double b;
+    std::string getTypeIdName() override;
 public:
     Rectangle();
     Rectangle(double a, double b);
@@ -18,6 +19,8 @@ public:
     void setB(double b);
     void setA(double a);
 
+    void text_save(std::ofstream&) override;
+    void text_load(std::ifstream&) override;
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
 

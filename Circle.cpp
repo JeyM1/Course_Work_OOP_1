@@ -46,3 +46,16 @@ void Circle::binary_load(std::ifstream& stream) {
     Figure::binary_load(stream);
     stream.read((char*)&(this->m_radius), sizeof(double));
 }
+
+void Circle::text_save(std::ofstream& stream) {
+    stream << *this << endl;
+}
+
+void Circle::text_load(std::ifstream& stream) {
+    Figure::text_load(stream);
+    stream >> this->m_radius;
+}
+
+std::string Circle::getTypeIdName() {
+    return typeid(Circle).name();
+}

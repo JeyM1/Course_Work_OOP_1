@@ -45,5 +45,16 @@ void Rectangle::binary_load(std::ifstream& stream) {
     stream.read((char*)&(this->b), sizeof(double));
 }
 
+void Rectangle::text_save(std::ofstream& stream) {
+    stream << *this << endl;
+}
 
+void Rectangle::text_load(std::ifstream& stream) {
+    Figure::text_load(stream);
+    stream >> a >> b;
+}
+
+std::string Rectangle::getTypeIdName() {
+    return typeid(Rectangle).name();
+}
 

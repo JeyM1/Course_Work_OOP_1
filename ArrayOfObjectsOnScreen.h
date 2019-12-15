@@ -23,6 +23,8 @@ public:
     double calculateAverageSquare(FigureName::e_FigureNames name = FigureName::Figure);
     Point calculateAveragePoint(FigureName::e_FigureNames name = FigureName::Figure);
 
+    void text_save(std::ofstream&) override;
+    void text_load(std::ifstream&) override;
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
     void add_load_type(FileHandler*(*callback)(std::string));

@@ -52,6 +52,29 @@ void Figure::binary_load(std::ifstream& stream) {
     stream.read((char*)&(this->m_figure_name), sizeof(e_FigureNames));
 }
 
+void Figure::text_save(std::ofstream& stream) {
+    stream << *this << "\n";
+}
+
+void Figure::text_load(std::ifstream& stream) {
+    stream >> this->x >> this->y >> this->m_square;
+    std::string buf;
+    stream >> buf;
+    if(buf == FigureName(FigureName::Circle).name()){
+        this->m_figure_name = FigureName::Circle;
+    } else if(buf == FigureName(FigureName::Triangle).name()){
+        this->m_figure_name = FigureName::Triangle;
+    } else if(buf == FigureName(FigureName::Rectangle).name()){
+        this->m_figure_name = FigureName::Rectangle;
+    } else if(buf == FigureName(FigureName::Ellipse).name()){
+        this->m_figure_name = FigureName::Ellipse;
+    }
+}
+
+std::string Figure::getTypeIdName() {
+    return typeid(Figure).name();
+}
+
 
 
 

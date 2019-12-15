@@ -50,3 +50,16 @@ void Ellipse::binary_load(std::ifstream& stream) {
     stream.read((char*)&(this->m_radius_horizontal), sizeof(double));
 }
 
+void Ellipse::text_save(std::ofstream& stream) {
+    stream << *this << "\n";
+}
+
+void Ellipse::text_load(std::ifstream& stream) {
+    Figure::text_load(stream);
+    stream >> this->m_radius_vertical >> this->m_radius_horizontal;
+}
+
+std::string Ellipse::getTypeIdName() {
+    return typeid(Ellipse).name();
+}
+

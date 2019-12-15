@@ -7,6 +7,7 @@
 class Ellipse : public Figure {
     double m_radius_vertical;
     double m_radius_horizontal;
+    std::string getTypeIdName() override;
 public:
     Ellipse();
     Ellipse(double radiusVertical, double radiusHorizontal);
@@ -18,6 +19,8 @@ public:
     void setRadiusHorizontal(double);
     void setRadiusVertical(double);
 
+    void text_save(std::ofstream&) override;
+    void text_load(std::ifstream&) override;
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
 

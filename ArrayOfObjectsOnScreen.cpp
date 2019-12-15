@@ -162,3 +162,37 @@ size_t ArrayOfObjectsOnScreen::size() {
     return m_figures.size();
 }
 
+void ArrayOfObjectsOnScreen::text_save(std::ofstream& stream) {
+    stream << typeid(ArrayOfObjectsOnScreen).name() << " "<< this->m_figures.size() << " " << this->x << " "
+                                                                                                << this->y << "\n";
+    for(int i = 0; i < m_figures.size(); i++){
+        stream << m_figures[i]->getTypeIdName() << " ";
+        m_figures[i]->text_save(stream);
+    }
+}
+
+void ArrayOfObjectsOnScreen::text_load(std::ifstream& stream) {
+    std::string buf;
+    stream >> buf;
+    size_t quantity = 0;
+    if(buf == typeid(ArrayOfObjectsOnScreen).name()){
+        stream >> quantity >> this->x >> this->y;
+        for(int i = 0; i < quantity; i++){
+            buf.clear();
+            stream >> buf;
+            Figure* obj = nullptr;
+            for(int el = 0; el < this->types.size(); el++){
+                FileHandler* _tmp = this->types[el](buf);
+                if(_tmp){
+                    obj = dynamic_cast<Figure*>(_tmp);
+                    break;
+                }
+            }
+            if(obj){
+                obj->text_load(stream);
+            } else throw UnknownDataTypeException();
+            this->m_figures.push_back(obj);
+        }
+    } else throw WrongInputFileException();
+}
+

@@ -6,6 +6,7 @@
 //TODO: Circle needs to be derived of Ellipse
 class Circle : public Figure {
     double m_radius;
+    std::string getTypeIdName() override;
 public:
     Circle();
     explicit Circle(double radius);
@@ -17,6 +18,8 @@ public:
     double getRadius() const;
     void setRadius(double);
 
+    void text_save(std::ofstream&) override;
+    void text_load(std::ifstream&) override;
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
 

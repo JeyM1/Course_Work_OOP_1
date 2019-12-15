@@ -18,6 +18,7 @@ public:
         }
     };
 protected:
+    std::string getTypeIdName() override;
     Points m_points;
 public:
     Triangle();
@@ -27,6 +28,8 @@ public:
     Points getPoints() const;
     void setPoints(const Points& points);
 
+    void text_save(std::ofstream&) override;
+    void text_load(std::ifstream&) override;
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
 

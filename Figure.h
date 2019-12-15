@@ -26,7 +26,10 @@ public:
     double getSquare() const;
     Point getPoint();
     void setSquare(double mSquare);
+    virtual std::string getTypeIdName();
 
+    void text_save(std::ofstream&) override;
+    void text_load(std::ifstream&) override;
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
 

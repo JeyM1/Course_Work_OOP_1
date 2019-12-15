@@ -16,6 +16,5 @@ add_executable(Course_Work_OOP_1 main.cpp
         ArrayOfObjectsOnScreen.cpp ArrayOfObjectsOnScreen.h
         SingleLinkedList/SL_List_Node.h SingleLinkedList/SL_List.h
         FileHandler/FileHandler.h
-        FileHandler/TypesHandler.cpp FileHandler/TypesHandler.h
         Exception.h
         )

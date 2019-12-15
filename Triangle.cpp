@@ -51,5 +51,20 @@ void Triangle::binary_load(std::ifstream& stream) {
     m_points.C.binary_load(stream);
 }
 
+void Triangle::text_save(std::ofstream& stream) {
+    stream << *this << "\n";
+}
+
+void Triangle::text_load(std::ifstream& stream) {
+    Figure::text_load(stream);
+    this->m_points.A.text_load(stream);
+    this->m_points.B.text_load(stream);
+    this->m_points.C.text_load(stream);
+}
+
+std::string Triangle::getTypeIdName() {
+    return typeid(Triangle).name();
+}
+
 
 

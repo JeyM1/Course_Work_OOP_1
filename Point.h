@@ -22,7 +22,7 @@ public:
     void setY(int y);
 
     void text_save(std::ofstream&) override;
-    void text_load(std::ifstream&);
+    void text_load(std::ifstream&) override;
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
 
