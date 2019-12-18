@@ -3,7 +3,6 @@
 
 
 #include "Figure.h"
-//TODO: Circle needs to be derived of Ellipse
 class Circle : public Figure {
     double m_radius;
     std::string getTypeIdName() override;

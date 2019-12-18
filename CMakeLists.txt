@@ -10,36 +10,47 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 
-# QtCreator supports the following variables for Android, which are identical to qmake Android variables.
-# Check http://doc.qt.io/qt-5/deployment-android.html for more information.
-# They need to be set before the find_package(Qt5 ...) call.
-
-#if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-#    if (ANDROID_ABI STREQUAL "armeabi-v7a")
-#        set(ANDROID_EXTRA_LIBS
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
-#    endif()
-#endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-if(ANDROID)
-  add_library(Course_Work_OOP_1 SHARED
+add_executable(Course_Work_OOP_1
     main.cpp
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-  )
-else()
-  add_executable(Course_Work_OOP_1
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
-endif()
+    Dialogs_AddFigures/dialog_addnewfigure.cpp
+    Dialogs_AddFigures/dialog_addnewfigure.h
+    Dialogs_AddFigures/dialog_addnewfigure.ui
+    Dialogs_AddFigures/dialog_addnewcircle.cpp
+    Dialogs_AddFigures/dialog_addnewcircle.h
+    Dialogs_AddFigures/dialog_addnewcircle.ui
+    Dialogs_AddFigures/dialog_addnewtriangle.cpp
+    Dialogs_AddFigures/dialog_addnewtriangle.h
+    Dialogs_AddFigures/dialog_addnewtriangle.ui
+    Dialogs_AddFigures/dialog_addnewrectangle.cpp
+    Dialogs_AddFigures/dialog_addnewrectangle.h
+    Dialogs_AddFigures/dialog_addnewrectangle.ui
+    Dialogs_AddFigures/dialog_addnewellipse.cpp
+    Dialogs_AddFigures/dialog_addnewellipse.h
+    Dialogs_AddFigures/dialog_addnewellipse.ui
+    dialog_drawablewindow.cpp
+    dialog_drawablewindow.h
+    dialog_drawablewindow.ui
+    Object.cpp Object.h
+    Point.cpp Point.h
+    Figure.cpp Figure.h
+    FigureName.cpp FigureName.h
+    Circle.cpp Circle.h
+    Triangle.cpp Triangle.h
+    Rectangle.cpp Rectangle.h
+    Ellipse.cpp Ellipse.h
+    ArrayOfObjectsOnScreen.cpp ArrayOfObjectsOnScreen.h
+    SingleLinkedList/SL_List_Node.h SingleLinkedList/SL_List.h
+    FileHandler/FileHandler.h
+    Exception.h
+    )
+
 
 target_link_libraries(Course_Work_OOP_1 PRIVATE Qt5::Widgets)
