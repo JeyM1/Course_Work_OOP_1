@@ -21,6 +21,12 @@ private slots:
     void on_addButton_clicked();
     void on_btn_Display_clicked();
 
+    void on_btn_remove_clicked();
+
+    void on_btn_save_clicked();
+
+    void on_btn_load_clicked();
+
 private:
     ArrayOfObjectsOnScreen* m_figures_on_screen;
     Ui::MainWindow *ui;

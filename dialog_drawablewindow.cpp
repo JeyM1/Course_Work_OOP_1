@@ -47,7 +47,7 @@ Dialog_DrawableWindow::~Dialog_DrawableWindow()
 void Dialog_DrawableWindow::paintEvent(QPaintEvent *event){
     QPainter painter(this);
     Q_UNUSED(event)
-    std::cout << "PAINT EVENT" << std::endl;
+    //std::cout << "PAINT EVENT" << std::endl;
     //painter.setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap));
     for(int i = 0; i < (int)this->list_handler->size(); i++){
         Figure* curr_obj = (*list_handler)[i];

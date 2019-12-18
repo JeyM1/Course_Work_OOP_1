@@ -1,7 +1,13 @@
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QScreen>
+#include <QDebug>
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "Dialogs_AddFigures/dialog_addnewfigure.h"
 #include "dialog_drawablewindow.h"
+#include "dialog_removefigure.h"
+#include "Exception.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,4 +41,76 @@ void MainWindow::on_btn_Display_clicked()
     Dialog_DrawableWindow render(m_figures_on_screen, this);
     render.setModal(true);
     render.exec();
+}
+
+void MainWindow::on_btn_remove_clicked()
+{
+    Dialog_RemoveFigure dial_remove(m_figures_on_screen, this);
+    dial_remove.setModal(true);
+    dial_remove.exec();
+}
+
+void MainWindow::on_btn_save_clicked()
+{
+    QSize size = qApp->screens()[0]->size();
+    QMessageBox msgBox;
+    msgBox.setGeometry(size.width()/2 - 244, size.height()/2 - 121, 244, 121);
+    msgBox.setWindowTitle("Select File type");
+    msgBox.setText("Select File type in which data will be saved:");
+    QAbstractButton *btn_Binary = msgBox.addButton("Binary", QMessageBox::ActionRole);
+    QAbstractButton *btn_Text = msgBox.addButton("Text", QMessageBox::ActionRole);
+    QAbstractButton *btn_Cancel = msgBox.addButton("Cancel", QMessageBox::RejectRole);
+    msgBox.setIcon(QMessageBox::Question);
+    msgBox.exec();
+    if(msgBox.clickedButton() == btn_Binary){
+        QString str = QFileDialog::getSaveFileName(this, "Choose folder");
+        std::ofstream fout(str.toStdString(), std::ios::binary);
+        m_figures_on_screen->binary_save(fout);
+        fout.close();
+    } else if(msgBox.clickedButton() == btn_Text){
+        QString str = QFileDialog::getSaveFileName(this, "Choose folder");
+        std::ofstream fout(str.toStdString());
+        m_figures_on_screen->text_save(fout);
+        fout.close();
+    } else if(msgBox.clickedButton() == btn_Cancel){
+        msgBox.close();
+    }
+    msgBox.close();
+}
+
+void MainWindow::on_btn_load_clicked()
+{
+    QSize size = qApp->screens()[0]->size();
+    QMessageBox msgBox;
+    msgBox.setGeometry(size.width()/2 - 244, size.height()/2 - 121, 244, 121);
+    msgBox.setWindowTitle("Select File type");
+    msgBox.setText("Select File type from what data will be loaded:");
+    QAbstractButton *btn_Binary = msgBox.addButton("Binary", QMessageBox::ActionRole);
+    QAbstractButton *btn_Text = msgBox.addButton("Text", QMessageBox::ActionRole);
+    QAbstractButton *btn_Cancel = msgBox.addButton("Cancel", QMessageBox::RejectRole);
+    msgBox.setIcon(QMessageBox::Question);
+    msgBox.exec();
+    try{
+        if(msgBox.clickedButton() == btn_Binary){
+            msgBox.close();
+            QString str = QFileDialog::getOpenFileName(this, "Choose folder");
+            std::ifstream fout(str.toStdString(), std::ios::binary);
+            m_figures_on_screen->binary_load(fout);
+            fout.close();
+        } else if(msgBox.clickedButton() == btn_Text){
+            msgBox.close();
+            QString str = QFileDialog::getOpenFileName(this, "Choose folder");
+            std::ifstream fout(str.toStdString());
+            m_figures_on_screen->text_load(fout);
+            fout.close();
+        } else if(msgBox.clickedButton() == btn_Cancel){
+            msgBox.close();
+            return;
+        }
+        QMessageBox::information(this, "Success!", "Figures successfuly loaded!");
+    } catch (WrongInputFileException&) {
+        QMessageBox::critical(this, "Error!", "File is unacceptable or corrupted! Please, try again");
+    } catch (...){
+        terminate();
+    }
 }

@@ -18,6 +18,7 @@ public:
     explicit ArrayOfObjectsOnScreen(SL_List<Figure*>&);
     void add(int idx, Figure*);
     void add(Figure*);
+    void remove(int idx);
     void clear();
     size_t size();
     double calculateAverageSquare(FigureName::e_FigureNames name = FigureName::Figure);

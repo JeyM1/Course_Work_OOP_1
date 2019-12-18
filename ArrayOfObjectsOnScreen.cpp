@@ -75,6 +75,9 @@ void ArrayOfObjectsOnScreen::binary_save(std::ofstream& stream) {
 void ArrayOfObjectsOnScreen::binary_load(std::ifstream& stream) {
     size_t nameLength = 0;
     stream.read((char*)&(nameLength), sizeof(size_t));
+    if(nameLength > 64){
+        throw WrongInputFileException();
+    }
     char* name = new char[nameLength];
     stream.read(name, nameLength * sizeof(char));
     if (strcmp(name, typeid(ArrayOfObjectsOnScreen).name()) != 0) {
@@ -146,6 +149,10 @@ std::ostream &operator<<(std::ostream& out, ArrayOfObjectsOnScreen& obj) {
         out << *obj.m_figures[i] << endl;
     }
     return out;
+}
+
+void ArrayOfObjectsOnScreen::remove(int idx){
+    this->m_figures.pop(idx);
 }
 
 void ArrayOfObjectsOnScreen::clear() {
