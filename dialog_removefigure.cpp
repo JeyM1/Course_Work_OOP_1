@@ -1,8 +1,14 @@
 #include "dialog_removefigure.h"
 #include "ui_dialog_removefigure.h"
+#include "Exception.h"
+#include "Dialogs_AddFigures/dialog_addnewcircle.h"
+#include "Dialogs_AddFigures/dialog_addnewtriangle.h"
+#include "Dialogs_AddFigures/dialog_addnewrectangle.h"
+#include "Dialogs_AddFigures/dialog_addnewellipse.h"
 #include <QPushButton>
 #include <QDebug>
 #include <QObject>
+#include <QColumnView>
 
 Dialog_RemoveFigure::Dialog_RemoveFigure(ArrayOfObjectsOnScreen* lst, QWidget *parent) :
     QDialog(parent),
@@ -52,6 +58,10 @@ void Dialog_RemoveFigure::tableWidgetUpdate(){
         ui->tableWidget->setCellWidget(i, 4, pWidget);
     }
     ui->tableWidget->resizeColumnsToContents();
+    QHeaderView *header = qobject_cast<QTableView *>(ui->tableWidget)->horizontalHeader();
+    connect(header, &QHeaderView::sectionClicked, [this](int logicalIndex){
+        ui->tableWidget->sortByColumn(logicalIndex, Qt::AscendingOrder);
+    });
 }
 
 void Dialog_RemoveFigure::tableWidget_onClicked() {
@@ -62,3 +72,5 @@ void Dialog_RemoveFigure::tableWidget_onClicked() {
     list_handler->remove(var.toInt());
     tableWidgetUpdate();
 }
+
+

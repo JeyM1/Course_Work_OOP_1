@@ -36,6 +36,11 @@ Dialog_DrawableWindow::Dialog_DrawableWindow(ArrayOfObjectsOnScreen* lst, QWidge
         ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString((*list_handler)[i]->name())));
     }
     ui->tableWidget->resizeColumnsToContents();
+    QHeaderView *header = qobject_cast<QTableView *>(ui->tableWidget)->horizontalHeader();
+    connect(header, &QHeaderView::sectionClicked, [this](int logicalIndex){
+        ui->tableWidget->sortByColumn(logicalIndex, Qt::AscendingOrder);
+    });
+
 
 }
 
@@ -94,4 +99,16 @@ void Dialog_DrawableWindow::on_btn_showlist_clicked()
         this->ui->btn_showlist->setText("Show list of figures");
     }
     btn_showlist_clicked = !btn_showlist_clicked;
+}
+
+void Dialog_DrawableWindow::on_tableWidget_cellDoubleClicked(int row, int column)
+{
+    connect(ui->tableWidget, &QTableWidget::cellChanged, [this, row, column](){
+        if(column == 1){
+            (*list_handler)[row]->setX(ui->tableWidget->itemAt(row, column)->text().toInt());
+        }else if(column == 2){
+            (*list_handler)[row]->setY(ui->tableWidget->itemAt(row, column)->text().toInt());
+        }
+        repaint();
+    });
 }

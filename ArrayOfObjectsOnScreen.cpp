@@ -73,6 +73,7 @@ void ArrayOfObjectsOnScreen::binary_save(std::ofstream& stream) {
 }
 
 void ArrayOfObjectsOnScreen::binary_load(std::ifstream& stream) {
+    this->clear();
     size_t nameLength = 0;
     stream.read((char*)&(nameLength), sizeof(size_t));
     if(nameLength > 64){
@@ -179,6 +180,7 @@ void ArrayOfObjectsOnScreen::text_save(std::ofstream& stream) {
 }
 
 void ArrayOfObjectsOnScreen::text_load(std::ifstream& stream) {
+    this->clear();
     std::string buf;
     stream >> buf;
     size_t quantity = 0;

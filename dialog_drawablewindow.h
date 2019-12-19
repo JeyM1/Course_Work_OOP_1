@@ -22,6 +22,8 @@ protected:
 private slots:
     void on_btn_showlist_clicked();
 
+    void on_tableWidget_cellDoubleClicked(int row, int column);
+
 private:
     Ui::Dialog_DrawableWindow *ui;
     ArrayOfObjectsOnScreen* list_handler;

@@ -2,6 +2,7 @@
 #define DIALOG_REMOVEFIGURE_H
 
 #include <QDialog>
+#include <QTableWidget>
 #include "ArrayOfObjectsOnScreen.h"
 
 namespace Ui {
