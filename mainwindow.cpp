@@ -20,8 +20,6 @@ MainWindow::MainWindow(ArrayOfObjectsOnScreen* lst, QWidget *parent)
     , m_figures_on_screen(lst)
     , ui(new Ui::MainWindow)
 {
-
-    //QMessageBox::information(this, "TODO:", "-SETTERS: CALCULATE SQUARE\n-End edit window");
     ui->setupUi(this);
 }
 
@@ -66,14 +64,18 @@ void MainWindow::on_btn_save_clicked()
     msgBox.exec();
     if(msgBox.clickedButton() == btn_Binary){
         QString str = QFileDialog::getSaveFileName(this, "Choose folder");
-        std::ofstream fout(str.toStdString(), std::ios::binary);
-        m_figures_on_screen->binary_save(fout);
-        fout.close();
+        if(str != ""){
+            std::ofstream fout(str.toStdString(), std::ios::binary);
+            m_figures_on_screen->binary_save(fout);
+            fout.close();
+        }
     } else if(msgBox.clickedButton() == btn_Text){
         QString str = QFileDialog::getSaveFileName(this, "Choose folder");
-        std::ofstream fout(str.toStdString());
-        m_figures_on_screen->text_save(fout);
-        fout.close();
+        if(str != ""){
+            std::ofstream fout(str.toStdString());
+            m_figures_on_screen->text_save(fout);
+            fout.close();
+        }
     } else if(msgBox.clickedButton() == btn_Cancel){
         msgBox.close();
     }
@@ -96,15 +98,19 @@ void MainWindow::on_btn_load_clicked()
         if(msgBox.clickedButton() == btn_Binary){
             msgBox.close();
             QString str = QFileDialog::getOpenFileName(this, "Choose folder");
-            std::ifstream fout(str.toStdString(), std::ios::binary);
-            m_figures_on_screen->binary_load(fout);
-            fout.close();
+            if(str != ""){
+                std::ifstream fout(str.toStdString(), std::ios::binary);
+                m_figures_on_screen->binary_load(fout);
+                fout.close();
+            }
         } else if(msgBox.clickedButton() == btn_Text){
             msgBox.close();
             QString str = QFileDialog::getOpenFileName(this, "Choose folder");
-            std::ifstream fout(str.toStdString());
-            m_figures_on_screen->text_load(fout);
-            fout.close();
+            if(str != ""){
+                std::ifstream fout(str.toStdString());
+                m_figures_on_screen->text_load(fout);
+                fout.close();
+            }
         } else if(msgBox.clickedButton() == btn_Cancel){
             msgBox.close();
             return;
