@@ -73,7 +73,6 @@ void ArrayOfObjectsOnScreen::binary_save(std::ofstream& stream) {
 }
 
 void ArrayOfObjectsOnScreen::binary_load(std::ifstream& stream) {
-    this->clear();
     size_t nameLength = 0;
     stream.read((char*)&(nameLength), sizeof(size_t));
     if(nameLength > 64){
@@ -85,6 +84,7 @@ void ArrayOfObjectsOnScreen::binary_load(std::ifstream& stream) {
         throw WrongInputFileException();
     }
     delete[] name;
+    this->clear();
     Point::binary_load(stream);
     size_t list_size = 0;
     stream.read((char*)&list_size, sizeof(size_t));
@@ -180,11 +180,11 @@ void ArrayOfObjectsOnScreen::text_save(std::ofstream& stream) {
 }
 
 void ArrayOfObjectsOnScreen::text_load(std::ifstream& stream) {
-    this->clear();
     std::string buf;
     stream >> buf;
     size_t quantity = 0;
     if(buf == typeid(ArrayOfObjectsOnScreen).name()){
+        this->clear();
         stream >> quantity >> this->x >> this->y;
         for(int i = 0; i < quantity; i++){
             buf.clear();
