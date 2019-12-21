@@ -105,9 +105,9 @@ void Dialog_DrawableWindow::on_tableWidget_cellDoubleClicked(int row, int column
 {
     connect(ui->tableWidget, &QTableWidget::cellChanged, [this, row, column](){
         if(column == 1){
-            (*list_handler)[row]->setX(ui->tableWidget->itemAt(row, column)->text().toInt());
+            (*list_handler)[row]->setX(ui->tableWidget->item(row, column)->text().toInt());
         }else if(column == 2){
-            (*list_handler)[row]->setY(ui->tableWidget->itemAt(row, column)->text().toInt());
+            (*list_handler)[row]->setY(ui->tableWidget->item(row, column)->text().toInt());
         }
         repaint();
     });

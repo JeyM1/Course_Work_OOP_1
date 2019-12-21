@@ -14,7 +14,7 @@ Circle::Circle(int x, int y, double radius) : Figure(x, y, FigureName::Circle), 
 Circle::~Circle() = default;
 
 double Circle::getRadius() const { return m_radius; }
-void Circle::setRadius(double radius) { m_radius = radius; }
+void Circle::setRadius(double radius) { m_radius = radius; m_square = M_PI * pow(radius, 2); }
 
 std::ostream &operator<<(std::ostream& out, const Circle& obj) {
     out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.m_radius;

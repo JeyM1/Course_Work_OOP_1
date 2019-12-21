@@ -16,6 +16,7 @@ Triangle::Triangle(const Point& A, const Point& B, const Point& C) : m_points(A,
 Triangle::~Triangle() = default;
 
 Triangle::Points Triangle::getPoints() const { return m_points; }
+Triangle::Points& Triangle::getrPoints() { return m_points; }
 void Triangle::setPoints(const Triangle::Points &points) { m_points = points; }
 
 std::ostream &operator<<(std::ostream& out, const Triangle& obj) {
@@ -66,5 +67,8 @@ std::string Triangle::getTypeIdName() {
     return typeid(Triangle).name();
 }
 
-
+void Triangle::recalculateSquare(){
+    this->m_square = std::abs((((double)m_points.A.getX() - (double)m_points.C.getX()) * ((double)m_points.B.getY() - (double)m_points.C.getY())) -
+                              (((double)m_points.B.getX() - (double)m_points.C.getX()) * ((double)m_points.A.getY() - (double)m_points.C.getY()))) / 2;
+}
 

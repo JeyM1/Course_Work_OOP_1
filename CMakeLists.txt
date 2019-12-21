@@ -38,9 +38,9 @@ add_executable(Course_Work_OOP_1
     dialog_drawablewindow.cpp
     dialog_drawablewindow.h
     dialog_drawablewindow.ui
-    dialog_removefigure.cpp
-    dialog_removefigure.h
-    dialog_removefigure.ui
+    dialog_editfigures.cpp
+    dialog_editfigures.h
+    dialog_editfigures.ui
     Object.cpp Object.h
     Point.cpp Point.h
     Figure.cpp Figure.h

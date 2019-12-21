@@ -6,7 +6,7 @@
 #include "./ui_mainwindow.h"
 #include "Dialogs_AddFigures/dialog_addnewfigure.h"
 #include "dialog_drawablewindow.h"
-#include "dialog_removefigure.h"
+#include "dialog_editfigures.h"
 #include "Exception.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,6 +20,8 @@ MainWindow::MainWindow(ArrayOfObjectsOnScreen* lst, QWidget *parent)
     , m_figures_on_screen(lst)
     , ui(new Ui::MainWindow)
 {
+
+    //QMessageBox::information(this, "TODO:", "-SETTERS: CALCULATE SQUARE\n-End edit window");
     ui->setupUi(this);
 }
 
@@ -29,7 +31,7 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_addButton_clicked()
+void MainWindow::on_btn_add_clicked()
 {
     Dialog_AddNewFigure dial_add(m_figures_on_screen, this);
     dial_add.setModal(true);
@@ -43,11 +45,11 @@ void MainWindow::on_btn_Display_clicked()
     render.exec();
 }
 
-void MainWindow::on_btn_remove_clicked()
+void MainWindow::on_btn_edit_clicked()
 {
-    Dialog_RemoveFigure dial_remove(m_figures_on_screen, this);
-    dial_remove.setModal(true);
-    dial_remove.exec();
+    Dialog_EditFigures dial_edit(m_figures_on_screen, this);
+    dial_edit.setModal(true);
+    dial_edit.exec();
 }
 
 void MainWindow::on_btn_save_clicked()

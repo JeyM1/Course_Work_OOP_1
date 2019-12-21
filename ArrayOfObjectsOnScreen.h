@@ -29,6 +29,7 @@ public:
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
     void add_load_type(FileHandler*(*callback)(std::string));
+    void sort_by_square();
 
     friend std::ostream& operator<<(std::ostream&, ArrayOfObjectsOnScreen&);
     Figure*operator[](int i);

@@ -15,9 +15,9 @@ std::ostream &operator<<(std::ostream& out, const Rectangle& obj) {
 }
 
 double Rectangle::getA() const { return a; }
-void Rectangle::setA(double a) { this->a = a; }
+void Rectangle::setA(double a) { this->a = a; this->m_square = a * b; }
 double Rectangle::getB() const { return b; }
-void Rectangle::setB(double b) { this->b = b; }
+void Rectangle::setB(double b) { this->b = b; this->m_square = a * b; }
 
 void Rectangle::binary_save(std::ofstream& stream) {
     size_t nameLength = strlen(typeid(Rectangle).name()) + 1;

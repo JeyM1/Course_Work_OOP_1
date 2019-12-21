@@ -198,7 +198,6 @@ void SL_List<T>::bubble_sort() {
         swapped = false;
         for(int j = 0; j < length - i - 1; j++){
             if(getNode(j)->data > getNode(j+1)->data) {
-
                 swap(j, j + 1);
                 swapped = true;
             }

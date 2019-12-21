@@ -205,3 +205,19 @@ void ArrayOfObjectsOnScreen::text_load(std::ifstream& stream) {
     } else throw WrongInputFileException();
 }
 
+void ArrayOfObjectsOnScreen::sort_by_square(){
+    bool swapped;
+    for(int i = 0; i < m_figures.size() - 1; i++){
+        swapped = false;
+        for(int j = 0; j < (int)m_figures.size() - i - 1; j++){
+            if(*(m_figures[j]) > *(m_figures[j+1])) {
+                m_figures.swap(j, j + 1);
+                swapped = true;
+            }
+        }
+        if(!swapped){
+            break;
+        }
+    }
+}
+

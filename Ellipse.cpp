@@ -15,8 +15,8 @@ Ellipse::~Ellipse() = default;
 
 double Ellipse::getRadiusVertical() const { return m_radius_vertical; }
 double Ellipse::getRadiusHorizontal() const { return m_radius_horizontal; }
-void Ellipse::setRadiusVertical(double radiusVertical) { m_radius_vertical = radiusVertical; }
-void Ellipse::setRadiusHorizontal(double radiusHorizontal) { m_radius_horizontal = radiusHorizontal; }
+void Ellipse::setRadiusVertical(double radiusVertical) { m_radius_vertical = radiusVertical; m_square = M_PI * m_radius_horizontal * m_radius_vertical; }
+void Ellipse::setRadiusHorizontal(double radiusHorizontal) { m_radius_horizontal = radiusHorizontal; m_square = M_PI * m_radius_horizontal * m_radius_vertical; }
 
 std::ostream &operator<<(std::ostream& out, const Ellipse& obj) {
     out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.m_radius_vertical << " " <<

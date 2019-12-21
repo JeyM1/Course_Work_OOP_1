@@ -120,7 +120,7 @@ Painter</string>
        <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QPushButton" name="addButton">
+          <widget class="QPushButton" name="btn_add">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -133,7 +133,7 @@ Painter</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btn_remove">
+          <widget class="QPushButton" name="btn_edit">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -141,7 +141,7 @@ Painter</string>
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Remove figure from list</string>
+            <string>Edit figure in the list</string>
            </property>
           </widget>
          </item>
@@ -242,8 +242,8 @@ Painter</string>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>472</x>
-     <y>488</y>
+     <x>789</x>
+     <y>589</y>
     </hint>
     <hint type="destinationlabel">
      <x>315</x>

@@ -75,12 +75,22 @@ std::string Figure::getTypeIdName() {
     return typeid(Figure).name();
 }
 
+bool Figure::operator <(const Figure& obj){
+    return this->m_square < obj.m_square;
+}
 
+bool Figure::operator >(const Figure& obj){
+    return this->m_square > obj.m_square;
+}
 
+bool Figure::operator ==(const Figure& obj){
+    return (this->m_square == obj.m_square) && this->m_figure_name == obj.m_figure_name;
+}
 
+bool Figure::operator >=(const Figure& obj){
+    return this->m_square >= obj.m_square;
+}
 
-
-
-
-
-
+bool Figure::operator <=(const Figure& obj){
+    return this->m_square <= obj.m_square;
+}

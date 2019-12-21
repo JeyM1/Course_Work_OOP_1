@@ -26,7 +26,9 @@ public:
     ~Triangle() override;
 
     Points getPoints() const;
+    Points& getrPoints();
     void setPoints(const Points& points);
+    void recalculateSquare();
 
     void text_save(std::ofstream&) override;
     void text_load(std::ifstream&) override;
