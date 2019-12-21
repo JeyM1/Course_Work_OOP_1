@@ -12,6 +12,7 @@ Dialog_DrawableWindow::Dialog_DrawableWindow(ArrayOfObjectsOnScreen* lst, QWidge
 {
     this->list_handler = lst;
     ui->setupUi(this);
+    ui->btn_showlist->setCheckable(true);
     this->setWindowState(Qt::WindowFullScreen);
     btn_showlist_clicked = false;
     //repaint();
@@ -88,13 +89,9 @@ void Dialog_DrawableWindow::paintEvent(QPaintEvent *event){
 void Dialog_DrawableWindow::on_btn_showlist_clicked()
 {
     if(!btn_showlist_clicked){
-        this->ui->btn_showlist->setFlat(true);
-        this->ui->btn_showlist->setDefault(true);
         this->ui->btn_showlist->setText("Hide list of figures");
         ui->tableWidget->show();
     }else{
-        this->ui->btn_showlist->setFlat(false);
-        this->ui->btn_showlist->setDefault(false);
         ui->tableWidget->hide();
         this->ui->btn_showlist->setText("Show list of figures");
     }

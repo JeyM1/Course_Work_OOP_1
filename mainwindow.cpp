@@ -63,24 +63,29 @@ void MainWindow::on_btn_save_clicked()
     QAbstractButton *btn_Cancel = msgBox.addButton("Cancel", QMessageBox::RejectRole);
     msgBox.setIcon(QMessageBox::Question);
     msgBox.exec();
+    bool saved = false;
     if(msgBox.clickedButton() == btn_Binary){
         QString str = QFileDialog::getSaveFileName(this, "Choose folder");
         if(str != ""){
             std::ofstream fout(str.toStdString(), std::ios::binary);
             m_figures_on_screen->binary_save(fout);
             fout.close();
+            saved = true;
         }
     } else if(msgBox.clickedButton() == btn_Text){
-        QString str = QFileDialog::getSaveFileName(this, "Choose folder");
+        QString str = QFileDialog::getSaveFileName(this, "Choose folder", "", "*.txt");
         if(str != ""){
             std::ofstream fout(str.toStdString());
             m_figures_on_screen->text_save(fout);
             fout.close();
+            saved = true;
         }
     } else if(msgBox.clickedButton() == btn_Cancel){
         msgBox.close();
     }
     msgBox.close();
+    if(saved)
+        QMessageBox::information(this, "Success!", "Figures successfuly saved!");
 }
 
 void MainWindow::on_btn_load_clicked()
@@ -95,6 +100,7 @@ void MainWindow::on_btn_load_clicked()
     QAbstractButton *btn_Cancel = msgBox.addButton("Cancel", QMessageBox::RejectRole);
     msgBox.setIcon(QMessageBox::Question);
     msgBox.exec();
+    bool loaded = false;
     try{
         if(msgBox.clickedButton() == btn_Binary){
             msgBox.close();
@@ -103,23 +109,27 @@ void MainWindow::on_btn_load_clicked()
                 std::ifstream fout(str.toStdString(), std::ios::binary);
                 m_figures_on_screen->binary_load(fout);
                 fout.close();
+                loaded = true;
             }
         } else if(msgBox.clickedButton() == btn_Text){
             msgBox.close();
-            QString str = QFileDialog::getOpenFileName(this, "Choose folder");
+            QString str = QFileDialog::getOpenFileName(this, "Choose folder", "", "*.txt");
             if(str != ""){
                 std::ifstream fout(str.toStdString());
                 m_figures_on_screen->text_load(fout);
                 fout.close();
+                loaded = true;
             }
         } else if(msgBox.clickedButton() == btn_Cancel){
             msgBox.close();
             return;
         }
-        QMessageBox::information(this, "Success!", "Figures successfuly loaded!");
     } catch (WrongInputFileException&) {
         QMessageBox::critical(this, "Error!", "File is unacceptable or corrupted! Please, try again");
     } catch (...){
         terminate();
     }
+    if(loaded)
+        QMessageBox::information(this, "Success!", "Figures successfuly loaded!");
+
 }
