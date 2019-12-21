@@ -53,6 +53,7 @@ add_executable(Course_Work_OOP_1
     SingleLinkedList/SL_List_Node.h SingleLinkedList/SL_List.h
     FileHandler/FileHandler.h
     Exception.h
+    app_resources.qrc
     )
 
 

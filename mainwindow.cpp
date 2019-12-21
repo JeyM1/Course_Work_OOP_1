@@ -20,6 +20,7 @@ MainWindow::MainWindow(ArrayOfObjectsOnScreen* lst, QWidget *parent)
     , m_figures_on_screen(lst)
     , ui(new Ui::MainWindow)
 {
+    setWindowIcon(QIcon(":/resources/img/icon.ico"));
     ui->setupUi(this);
 }
 
