@@ -90,7 +90,7 @@ Painter</string>
           <string>
 -Press &quot;Display all figures&quot; button to open a new window with all your figures.
 -Press &quot;Add new figure&quot; to add more figures.
--Press &quot;Remove figure...&quot; to open list with all figures and press button near it to remove certain figure.
+-Press &quot;Edit figure...&quot; to open lists with figures and double-click on field to edit or press button to remove figure.
 -Press &quot;Save/Load figures&quot; to save/load all created figures.
 -Press &quot;Exit&quot; button to exit from program</string>
          </property>
