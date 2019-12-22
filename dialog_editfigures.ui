@@ -160,7 +160,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0" rowspan="2" colspan="2">
+   <item row="1" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QGroupBox" name="groupRect">
@@ -304,7 +304,14 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="0" colspan="2">
+   <item row="2" column="0">
+    <widget class="QPushButton" name="btn_remove_all">
+     <property name="text">
+      <string>Remove all</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
     <widget class="QPushButton" name="btn_back">
      <property name="text">
       <string>Back</string>

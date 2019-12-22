@@ -246,3 +246,9 @@ void Dialog_EditFigures::on_tableEllipse_cellDoubleClicked(int row, int column)
         }
     });
 }
+
+void Dialog_EditFigures::on_btn_remove_all_clicked()
+{
+    this->list_handler->clear();
+    tablesUpdate();
+}

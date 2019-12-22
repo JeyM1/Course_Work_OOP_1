@@ -27,6 +27,8 @@ private slots:
 
     void on_tableEllipse_cellDoubleClicked(int row, int column);
 
+    void on_btn_remove_all_clicked();
+
 private:
     Ui::Dialog_EditFigures *ui;
     ArrayOfObjectsOnScreen* list_handler;
