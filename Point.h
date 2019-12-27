@@ -32,6 +32,7 @@ public:
     Point operator /(int) const;
     Point& operator +=(const Point&);
     Point& operator =(const Point&);
+	Point& operator /=(int);
 };
 
 

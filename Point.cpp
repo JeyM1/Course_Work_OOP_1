@@ -90,3 +90,8 @@ Point& Point::operator =(const Point& obj) {
 	return *this;
 }
 
+Point& Point::operator /=(int num) {
+	this->x /= num;
+	this->y /= num;
+	return *this;
+}

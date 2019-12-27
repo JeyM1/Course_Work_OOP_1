@@ -29,6 +29,8 @@ private slots:
 
     void on_btn_remove_all_clicked();
 
+	void on_btn_find_clicked();
+
 private:
     Ui::Dialog_EditFigures *ui;
     ArrayOfObjectsOnScreen* list_handler;

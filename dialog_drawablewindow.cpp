@@ -29,7 +29,7 @@ Dialog_DrawableWindow::Dialog_DrawableWindow(ArrayOfObjectsOnScreen* lst, QWidge
 	                                           << "Square"
 	                                           << "Figure type");
 	ui->tableWidget->hideColumn(0);
-	for(int i = 0; i < list_handler->size(); i++){
+	for(int i = 0; i < list_handler->size(); i++) {
 		ui->tableWidget->insertRow(i);
 		ui->tableWidget->setItem(i, 1, new QTableWidgetItem(QString::number((*list_handler)[i]->getX())));
 		ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString::number((*list_handler)[i]->getY())));
@@ -54,7 +54,7 @@ Dialog_DrawableWindow::~Dialog_DrawableWindow()
 	delete ui;
 }
 
-void Dialog_DrawableWindow::paintEvent(QPaintEvent *event){
+void Dialog_DrawableWindow::paintEvent(QPaintEvent *event) {
 	QPainter painter(this);
 	Q_UNUSED(event)
 	for(int i = 0; i < (int)this->list_handler->size(); i++){

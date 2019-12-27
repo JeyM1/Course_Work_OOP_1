@@ -2,6 +2,7 @@
 #include "ui_dialog_editfigures.h"
 #include "Exception.h"
 #include <QDebug>
+#include "dialog_findfigure.h"
 
 Dialog_EditFigures::Dialog_EditFigures(ArrayOfObjectsOnScreen* lst, QWidget *parent) :
     QDialog(parent),
@@ -47,34 +48,61 @@ void Dialog_EditFigures::tablesUpdate(){
     double avg_square_Circle = 0;
     double avg_square_Triangle = 0;
     double avg_square_Rect = 0;
-    double avg_square_Ellipse = 0;
+	double avg_square_Ellipse = 0;
 
-    /*ui->tableCircle->setRowCount(0);
-    ui->tableCircle->setHorizontalHeaderLabels(QStringList() << "id"
-                                               << "Central point"
-                                               << "Square"
-                                               << "Figure type"
-                                               << "Action");*/
     for(int i = 0; i < list_handler->size(); i++){
         Figure* working = (*list_handler)[i];
         if(working->getFigureName() == FigureName::Circle){
             tableCircleUpdate(dynamic_cast<Circle*>(working), i, cnt_circle);
             avg_point_Circle += working->getPoint();
+			avg_square_Circle += working->getSquare();
             cnt_circle++;
         }else if(working->getFigureName() == FigureName::Triangle){
             tableTriangleUpdate(dynamic_cast<Triangle*>(working), i, cnt_triangle);
+			avg_point_Triangle += working->getPoint();
+			avg_square_Triangle += working->getSquare();
             cnt_triangle++;
         }else if(working->getFigureName() == FigureName::Rectangle){
             tableRectUpdate(dynamic_cast<Rectangle*>(working), i, cnt_rect);
+			avg_point_Rect += working->getPoint();
+			avg_square_Rect += working->getSquare();
             cnt_rect++;
         }else if(working->getFigureName() == FigureName::Ellipse){
             tableEllipseUpdate(dynamic_cast<Ellipse*>(working), i, cnt_ellipse);
+			avg_point_Ellipse += working->getPoint();
+			avg_square_Ellipse += working->getSquare();
             cnt_ellipse++;
         }
     }
 
-
-
+	if(cnt_circle){
+		avg_point_Circle /= cnt_circle;
+		avg_square_Circle /= cnt_circle;
+	}
+	if(cnt_triangle){
+		avg_point_Triangle /= cnt_triangle;
+		avg_square_Triangle /= cnt_triangle;
+	}
+	if(cnt_rect){
+		avg_point_Rect /= cnt_rect;
+		avg_square_Rect /= cnt_rect;
+	}
+	if(cnt_ellipse){
+		avg_point_Ellipse /= cnt_ellipse;
+		avg_square_Ellipse /= cnt_ellipse;
+	}
+	ui->lbl_circle_avg_point->setText("Average point:\t[" + QString::number(avg_point_Circle.getX())
+	                                  + ", " + QString::number(avg_point_Circle.getY()) + "]");
+	ui->lbl_circle_avg_square->setText("Average square:\t" + QString::number(avg_square_Circle));
+	ui->lbl_triangle_avg_point->setText("Average point:\t[" + QString::number(avg_point_Triangle.getX())
+	                                    + ", " + QString::number(avg_point_Triangle.getY()) + "]");
+	ui->lbl_triangle_avg_square->setText("Average square:\t" + QString::number(avg_square_Triangle));
+	ui->lbl_rect_avg_point->setText("Average point:\t[" + QString::number(avg_point_Rect.getX())
+	                                + ", " + QString::number(avg_point_Rect.getY()) + "]");
+	ui->lbl_rect_avg_square->setText("Average square:\t" + QString::number(avg_square_Rect));
+	ui->lbl_ellipse_avg_point->setText("Average point:\t[" + QString::number(avg_point_Ellipse.getX())
+	                                  + ", " + QString::number(avg_point_Ellipse.getY()) + "]");
+	ui->lbl_ellipse_avg_square->setText("Average square:\t" + QString::number(avg_square_Ellipse));
 }
 
 void Dialog_EditFigures::tableCircleUpdate(Circle* figure, int index, int row){
@@ -266,4 +294,11 @@ void Dialog_EditFigures::on_btn_remove_all_clicked()
 {
     this->list_handler->clear();
     tablesUpdate();
+}
+
+void Dialog_EditFigures::on_btn_find_clicked()
+{
+	Dialog_FindFigure finder(list_handler);
+	finder.setModal(true);
+	finder.exec();
 }
