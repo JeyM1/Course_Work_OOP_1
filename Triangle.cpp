@@ -4,9 +4,8 @@
 #include "Exception.h"
 
 Triangle::Triangle() : Figure(FigureName::Triangle), m_points() {}
-Triangle::Triangle(const Point& A, const Point& B, const Point& C) : m_points(A, B, C),
-                                                                     Figure((A + B + C)/3, //get center of any triangle: (A + B + C)/3
-                                                                             FigureName::Triangle) {
+Triangle::Triangle(const Point& A, const Point& B, const Point& C) : Figure((A + B + C)/3, //get center of any triangle: (A + B + C)/3
+                                                                     FigureName::Triangle), m_points(A, B, C) {
     /* Here using formula of getting square of triangle with only points available:
      * S = 1/2 * | x1 - x3  y1 - y3 |
      *           | x2 - x3  y2 - y3 |         */
@@ -18,11 +17,6 @@ Triangle::~Triangle() = default;
 Triangle::Points Triangle::getPoints() const { return m_points; }
 Triangle::Points& Triangle::getrPoints() { return m_points; }
 void Triangle::setPoints(const Triangle::Points &points) { m_points = points; }
-
-std::ostream &operator<<(std::ostream& out, const Triangle& obj) {
-    out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name() << " " << obj.m_points;
-    return out;
-}
 
 void Triangle::binary_save(std::ofstream& stream) {
     size_t nameLength = strlen(typeid(Triangle).name()) + 1;
@@ -49,7 +43,7 @@ void Triangle::binary_load(std::ifstream& stream) {
     Figure::binary_load(stream);
     m_points.A.binary_load(stream);
     m_points.B.binary_load(stream);
-    m_points.C.binary_load(stream);
+	m_points.C.binary_load(stream);
 }
 
 void Triangle::text_save(std::ofstream& stream) {
@@ -72,3 +66,30 @@ void Triangle::recalculateSquare(){
                               (((double)m_points.B.getX() - (double)m_points.C.getX()) * ((double)m_points.A.getY() - (double)m_points.C.getY()))) / 2;
 }
 
+
+std::ostream& operator<<(std::ostream& out, const Triangle& obj) {
+	out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name() << " " << obj.m_points;
+	return out;
+}
+
+bool Triangle::operator <(const Figure& obj) {
+	const Triangle* other = dynamic_cast<const Triangle*>(&obj);
+	if(!other)
+		throw CastFailedException();
+	return this->m_square > other->m_square;
+}
+
+bool Triangle::operator >(const Figure& obj) {
+	const Triangle* other = dynamic_cast<const Triangle*>(&obj);
+	if(!other)
+		throw CastFailedException();
+	return this->m_square > other->m_square;
+}
+
+Triangle& Triangle::operator =(const Triangle& obj) {
+	Figure::operator=(obj);
+	this->m_points.A = obj.m_points.A;
+	this->m_points.B = obj.m_points.B;
+	this->m_points.C = obj.m_points.C;
+	return *this;
+}

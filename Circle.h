@@ -23,6 +23,9 @@ public:
     void binary_load(std::ifstream&) override;
 
     friend std::ostream& operator<<(std::ostream&, const Circle&);
+	bool operator <(const Figure&) override;
+	bool operator >(const Figure&) override;
+	Circle& operator =(const Circle&);
 };
 
 

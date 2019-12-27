@@ -33,12 +33,10 @@ public:
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
 
-    bool operator >(const Figure&);
-    bool operator <(const Figure&);
-    bool operator ==(const Figure&);
-    bool operator >=(const Figure&);
-    bool operator <=(const Figure&);
+	virtual bool operator <(const Figure&);
+	virtual bool operator >(const Figure&);
     friend std::ostream& operator<<(std::ostream&, const Figure&);
+	Figure& operator =(const Figure&);
 };
 
 

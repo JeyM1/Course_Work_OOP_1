@@ -21,11 +21,6 @@ Point Figure::getPoint() {
     return Point(this->x, this->y);
 }
 
-std::ostream &operator<<(std::ostream& out, const Figure& obj) {
-    out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name();
-    return out;
-}
-
 void Figure::binary_save(std::ofstream& stream) {
     size_t nameLength = strlen(typeid(Figure).name()) + 1;
     char* name = new char[nameLength];
@@ -75,22 +70,23 @@ std::string Figure::getTypeIdName() {
     return typeid(Figure).name();
 }
 
-bool Figure::operator <(const Figure& obj){
+
+std::ostream& operator <<(std::ostream& out, const Figure& obj) {
+	out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name();
+	return out;
+}
+
+bool Figure::operator <(const Figure& obj) {
     return this->m_square < obj.m_square;
 }
 
-bool Figure::operator >(const Figure& obj){
+bool Figure::operator >(const Figure& obj) {
     return this->m_square > obj.m_square;
 }
 
-bool Figure::operator ==(const Figure& obj){
-    return (this->m_square == obj.m_square) && this->m_figure_name == obj.m_figure_name;
-}
-
-bool Figure::operator >=(const Figure& obj){
-    return this->m_square >= obj.m_square;
-}
-
-bool Figure::operator <=(const Figure& obj){
-    return this->m_square <= obj.m_square;
+Figure& Figure::operator =(const Figure& obj) {
+	Point::operator=(obj);
+	this->m_square = obj.m_square;
+	this->m_figure_name = obj.m_figure_name;
+	return *this;
 }

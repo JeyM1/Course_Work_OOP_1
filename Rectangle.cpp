@@ -9,11 +9,6 @@ Rectangle::Rectangle(double a, double b) : Figure(FigureName::Rectangle), a(a), 
 Rectangle::Rectangle(int x, int y, double a, double b) : Figure(x, y, FigureName::Rectangle, a*b), a(a), b(b) {}
 Rectangle::~Rectangle() = default;
 
-std::ostream &operator<<(std::ostream& out, const Rectangle& obj) {
-    out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.a << " " << obj.b;
-    return out;
-}
-
 double Rectangle::getA() const { return a; }
 void Rectangle::setA(double a) { this->a = a; this->m_square = a * b; }
 double Rectangle::getB() const { return b; }
@@ -42,7 +37,7 @@ void Rectangle::binary_load(std::ifstream& stream) {
     delete[] name;
     Figure::binary_load(stream);
     stream.read((char*)&(this->a), sizeof(double));
-    stream.read((char*)&(this->b), sizeof(double));
+	stream.read((char*)&(this->b), sizeof(double));
 }
 
 void Rectangle::text_save(std::ofstream& stream) {
@@ -58,3 +53,29 @@ std::string Rectangle::getTypeIdName() {
     return typeid(Rectangle).name();
 }
 
+
+std::ostream& operator<<(std::ostream& out, const Rectangle& obj) {
+	out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.a << " " << obj.b;
+	return out;
+}
+
+bool Rectangle::operator <(const Figure& obj) {
+	const Rectangle* other = dynamic_cast<const Rectangle*>(&obj);
+	if(!other)
+		throw CastFailedException();
+	return (this->a * this->b) < (other->a * other->b);
+}
+
+bool Rectangle::operator >(const Figure& obj) {
+	const Rectangle* other = dynamic_cast<const Rectangle*>(&obj);
+	if(!other)
+		throw CastFailedException();
+	return (this->a * this->b) < (other->a * other->b);
+}
+
+Rectangle& Rectangle::operator =(const Rectangle& obj) {
+	Figure::operator=(obj);
+	this->a = obj.a;
+	this->b = obj.b;
+	return *this;
+}

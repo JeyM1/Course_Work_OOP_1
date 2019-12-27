@@ -38,6 +38,17 @@ void Dialog_EditFigures::tablesUpdate(){
     int cnt_triangle = 0;
     int cnt_rect = 0;
     int cnt_ellipse = 0;
+
+    Point avg_point_Circle;
+    Point avg_point_Triangle;
+    Point avg_point_Rect;
+    Point avg_point_Ellipse;
+
+    double avg_square_Circle = 0;
+    double avg_square_Triangle = 0;
+    double avg_square_Rect = 0;
+    double avg_square_Ellipse = 0;
+
     /*ui->tableCircle->setRowCount(0);
     ui->tableCircle->setHorizontalHeaderLabels(QStringList() << "id"
                                                << "Central point"
@@ -48,6 +59,7 @@ void Dialog_EditFigures::tablesUpdate(){
         Figure* working = (*list_handler)[i];
         if(working->getFigureName() == FigureName::Circle){
             tableCircleUpdate(dynamic_cast<Circle*>(working), i, cnt_circle);
+            avg_point_Circle += working->getPoint();
             cnt_circle++;
         }else if(working->getFigureName() == FigureName::Triangle){
             tableTriangleUpdate(dynamic_cast<Triangle*>(working), i, cnt_triangle);
@@ -60,6 +72,9 @@ void Dialog_EditFigures::tablesUpdate(){
             cnt_ellipse++;
         }
     }
+
+
+
 }
 
 void Dialog_EditFigures::tableCircleUpdate(Circle* figure, int index, int row){

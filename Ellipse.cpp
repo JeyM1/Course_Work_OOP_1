@@ -18,12 +18,6 @@ double Ellipse::getRadiusHorizontal() const { return m_radius_horizontal; }
 void Ellipse::setRadiusVertical(double radiusVertical) { m_radius_vertical = radiusVertical; m_square = M_PI * m_radius_horizontal * m_radius_vertical; }
 void Ellipse::setRadiusHorizontal(double radiusHorizontal) { m_radius_horizontal = radiusHorizontal; m_square = M_PI * m_radius_horizontal * m_radius_vertical; }
 
-std::ostream &operator<<(std::ostream& out, const Ellipse& obj) {
-    out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.m_radius_vertical << " " <<
-                                                                                            obj.m_radius_horizontal;
-    return out;
-}
-
 void Ellipse::binary_save(std::ofstream& stream) {
     size_t nameLength = strlen(typeid(Ellipse).name()) + 1;
     char* name = new char[nameLength];
@@ -47,7 +41,7 @@ void Ellipse::binary_load(std::ifstream& stream) {
     delete[] name;
     Figure::binary_load(stream);
     stream.read((char*)&(this->m_radius_vertical), sizeof(double));
-    stream.read((char*)&(this->m_radius_horizontal), sizeof(double));
+	stream.read((char*)&(this->m_radius_horizontal), sizeof(double));
 }
 
 void Ellipse::text_save(std::ofstream& stream) {
@@ -63,3 +57,32 @@ std::string Ellipse::getTypeIdName() {
     return typeid(Ellipse).name();
 }
 
+
+std::ostream& operator<<(std::ostream& out, const Ellipse& obj) {
+	out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.m_radius_vertical << " " <<
+	                                                                                        obj.m_radius_horizontal;
+	return out;
+}
+
+bool Ellipse::operator <(const Figure& obj) {
+	const Ellipse* other = dynamic_cast<const Ellipse*>(&obj);
+	if(!other)
+		throw CastFailedException();
+	return (this->m_radius_vertical * this->m_radius_horizontal) <
+	        (other->m_radius_vertical * other->m_radius_horizontal);
+}
+
+bool Ellipse::operator >(const Figure& obj) {
+	const Ellipse* other = dynamic_cast<const Ellipse*>(&obj);
+	if(!other)
+		throw CastFailedException();
+	return (this->m_radius_vertical * this->m_radius_horizontal) >
+	        (other->m_radius_vertical * other->m_radius_horizontal);
+}
+
+Ellipse& Ellipse::operator =(const Ellipse& obj) {
+	Figure::operator=(obj);
+	this->m_radius_vertical = obj.m_radius_vertical;
+	this->m_radius_horizontal = obj.m_radius_horizontal;
+	return *this;
+}
