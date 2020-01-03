@@ -1,5 +1,6 @@
 #include <cmath>
 #include <cstring>
+#include <iomanip>
 #include "Ellipse.h"
 #include "Exception.h"
 
@@ -59,8 +60,9 @@ std::string Ellipse::getTypeIdName() {
 
 
 std::ostream& operator<<(std::ostream& out, const Ellipse& obj) {
-	out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.m_radius_vertical << " " <<
-	                                                                                        obj.m_radius_horizontal;
+	out << obj.x << " " << obj.y << " " << std::fixed << setprecision(10) << obj.m_square << " "
+	    << obj.name() << " " << std::fixed << setprecision(10) << obj.m_radius_vertical << " "
+	    << std::fixed << setprecision(10) << obj.m_radius_horizontal;
 	return out;
 }
 

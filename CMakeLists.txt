@@ -44,6 +44,9 @@ add_executable(Course_Work_OOP_1
     dialog_findfigure.cpp
     dialog_findfigure.h
     dialog_findfigure.ui
+    dialog_foundfigures.cpp
+    dialog_foundfigures.h
+    dialog_foundfigures.ui
     Object.cpp Object.h
     Point.cpp Point.h
     Figure.cpp Figure.h

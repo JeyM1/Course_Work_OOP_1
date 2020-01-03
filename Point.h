@@ -33,6 +33,7 @@ public:
     Point& operator +=(const Point&);
     Point& operator =(const Point&);
 	Point& operator /=(int);
+	bool operator ==(const Point&);
 };
 
 

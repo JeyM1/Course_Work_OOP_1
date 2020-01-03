@@ -1,4 +1,5 @@
 #include <cstring>
+#include <iomanip>
 #include "Rectangle.h"
 #include "Exception.h"
 
@@ -55,7 +56,8 @@ std::string Rectangle::getTypeIdName() {
 
 
 std::ostream& operator<<(std::ostream& out, const Rectangle& obj) {
-	out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.a << " " << obj.b;
+	out << obj.x << " " << obj.y << " " << std::fixed << setprecision(10) << obj.m_square << " " << obj.name() << " "
+	    << std::fixed << setprecision(10) << obj.a << " " << std::fixed << setprecision(10) << obj.b;
 	return out;
 }
 

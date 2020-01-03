@@ -163,6 +163,8 @@ void ArrayOfObjectsOnScreen::clear() {
 }
 
 Figure *ArrayOfObjectsOnScreen::operator[](int i) {
+	if(i < 0 || i >= m_figures.size())
+		throw IndexOutOfBoundsException();
     return m_figures[i];
 }
 
@@ -218,6 +220,46 @@ void ArrayOfObjectsOnScreen::sort_by_square(){
         if(!swapped){
             break;
         }
-    }
+	}
+}
+
+std::vector<int> ArrayOfObjectsOnScreen::find_by_point(Point point) {
+	std::vector<int> ret;
+	for(int i = 0; i < this->size(); i++){
+		Figure* curr = this->m_figures[i];
+		if(point == curr->getPoint())
+			ret.push_back(i);
+	}
+	return ret;
+}
+
+std::vector<int> ArrayOfObjectsOnScreen::find_by_square(double square) {
+	std::vector<int> ret;
+	for(int i = 0; i < this->size(); i++){
+		Figure* curr = this->m_figures[i];
+		if(square == curr->getSquare())
+			ret.push_back(i);
+	}
+	return ret;
+}
+
+std::vector<int> ArrayOfObjectsOnScreen::find_by_point(Point point, FigureName::e_FigureNames fig_name) {
+	std::vector<int> ret;
+	for(int i = 0; i < this->size(); i++){
+		Figure* curr = this->m_figures[i];
+		if(point == curr->getPoint() && curr->getFigureName() == fig_name)
+			ret.push_back(i);
+	}
+	return ret;
+}
+
+std::vector<int> ArrayOfObjectsOnScreen::find_by_square(double square, FigureName::e_FigureNames fig_name) {
+	std::vector<int> ret;
+	for(int i = 0; i < this->size(); i++){
+		Figure* curr = this->m_figures[i];
+		if(square == curr->getSquare() && curr->getFigureName() == fig_name)
+			ret.push_back(i);
+	}
+	return ret;
 }
 

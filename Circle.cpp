@@ -1,5 +1,6 @@
 #include <cmath>
 #include <cstring>
+#include <iomanip>
 #include "Circle.h"
 #include "Exception.h"
 
@@ -76,6 +77,6 @@ Circle& Circle::operator =(const Circle& obj) {
 }
 
 std::ostream &operator<<(std::ostream& out, const Circle& obj) {
-	out << obj.x << " " << obj.y << " " << obj.m_square << " " << obj.name() << " " << obj.m_radius;
+	out << obj.x << " " << obj.y << " " << std::fixed << setprecision(10) << obj.m_square << " " << obj.name() << " " << obj.m_radius;
 	return out;
 }

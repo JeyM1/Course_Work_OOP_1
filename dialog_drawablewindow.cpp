@@ -22,7 +22,6 @@ Dialog_DrawableWindow::Dialog_DrawableWindow(ArrayOfObjectsOnScreen* lst, QWidge
 	ui->tableWidget->setShowGrid(true);
 	ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
 	ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectItems);
-	//ui->tableWidget->horizontalHeader()->;
 	ui->tableWidget->setHorizontalHeaderLabels(QStringList() << "id"
 	                                           << "Central x coordinate"
 	                                           << "Central y coordinate"
@@ -33,7 +32,7 @@ Dialog_DrawableWindow::Dialog_DrawableWindow(ArrayOfObjectsOnScreen* lst, QWidge
 		ui->tableWidget->insertRow(i);
 		ui->tableWidget->setItem(i, 1, new QTableWidgetItem(QString::number((*list_handler)[i]->getX())));
 		ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString::number((*list_handler)[i]->getY())));
-		QTableWidgetItem *square = new QTableWidgetItem(QString::number((*list_handler)[i]->getSquare()));
+		QTableWidgetItem *square = new QTableWidgetItem(QString::number((*list_handler)[i]->getSquare(), 'g', 10));
 		square->setFlags(square->flags() ^ Qt::ItemIsEditable);
 		ui->tableWidget->setItem(i, 3, square);
 		QTableWidgetItem *fig_name = new QTableWidgetItem(QString((*list_handler)[i]->name()));

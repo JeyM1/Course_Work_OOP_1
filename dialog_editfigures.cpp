@@ -298,7 +298,7 @@ void Dialog_EditFigures::on_btn_remove_all_clicked()
 
 void Dialog_EditFigures::on_btn_find_clicked()
 {
-	Dialog_FindFigure finder(list_handler);
+	Dialog_FindFigure finder(list_handler, this);
 	finder.setModal(true);
 	finder.exec();
 }

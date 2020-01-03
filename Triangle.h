@@ -16,6 +16,9 @@ public:
         friend std::ostream& operator<<(std::ostream& out, const Points& obj){
             return out << obj.A << " " << obj.B << " " << obj.C;
         }
+		bool operator ==(const Points& obj){
+			return (A == obj.A) && (B == obj.B) && (C == obj.C);
+		}
     };
 protected:
     std::string getTypeIdName() override;

@@ -95,3 +95,7 @@ Point& Point::operator /=(int num) {
 	this->y /= num;
 	return *this;
 }
+
+bool Point::operator ==(const Point& obj) {
+	return this->x == obj.x && this->y == obj.y;
+}

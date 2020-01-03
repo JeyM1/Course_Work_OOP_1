@@ -1,5 +1,6 @@
 #include <cmath>
 #include <cstring>
+#include <iomanip>
 #include "Triangle.h"
 #include "Exception.h"
 
@@ -68,7 +69,7 @@ void Triangle::recalculateSquare(){
 
 
 std::ostream& operator<<(std::ostream& out, const Triangle& obj) {
-	out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name() << " " << obj.m_points;
+	out << obj.x << " " << obj.y << " " << std::fixed << setprecision(10) << obj.m_square << " "  << obj.name() << " " << obj.m_points;
 	return out;
 }
 
