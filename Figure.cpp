@@ -16,7 +16,6 @@ Figure::Figure(FigureName::e_FigureNames name, double square) : FigureName(name)
 Figure::~Figure() = default;
 
 double Figure::getSquare() const { return m_square; }
-void Figure::setSquare(double mSquare) { m_square = mSquare; }
 Point Figure::getPoint() {
     return Point(this->x, this->y);
 }

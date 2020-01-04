@@ -14,8 +14,7 @@ public:
     explicit FigureName(e_FigureNames);
     const char* name() const;
 
-    e_FigureNames getFigureName() const;
-    void setFigureName(e_FigureNames mFigureName);
+	e_FigureNames getFigureName() const;
 };
 
 

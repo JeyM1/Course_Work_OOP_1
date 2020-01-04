@@ -24,8 +24,7 @@ public:
     ~Figure() override;
 
     double getSquare() const;
-    Point getPoint();
-    void setSquare(double mSquare);
+	Point getPoint();
     virtual std::string getTypeIdName();
 
     void text_save(std::ofstream&) override;

@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <windows.h>
 
+
 int main(int argc, char *argv[])
 {
     FreeConsole();
@@ -15,3 +16,5 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+
+
