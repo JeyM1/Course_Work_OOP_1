@@ -30,6 +30,10 @@ public:
     Point operator +(const Point&) const;
     Point operator /(const Point&) const;
     Point operator /(int) const;
+    Point& operator +=(const Point&);
+    Point& operator =(const Point&);
+	Point& operator /=(int);
+	bool operator ==(const Point&);
 };
 
 

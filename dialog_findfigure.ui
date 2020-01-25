@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_FindFigure</class>
+ <widget class="QDialog" name="Dialog_FindFigure">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Find Figures</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_7">
+   <item row="2" column="0">
+    <widget class="QWidget" name="widget_ellipse" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="0" column="0">
+       <widget class="QWidget" name="widget_horizontal" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="lbl_horizontal">
+           <property name="text">
+            <string>Horizontal radius:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="LE_horizontal"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QWidget" name="widget_vertical" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="lbl_vertical">
+           <property name="text">
+            <string>Vertical radius:    </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="LE_vertical"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QWidget" name="widget_points" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QGroupBox" name="groupBox_A">
+        <property name="title">
+         <string>A point</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="A_x_layout">
+           <item>
+            <widget class="QLabel" name="lbl_A_x">
+             <property name="text">
+              <string>A x:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="LE_A_x"/>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="A_y_layout">
+           <item>
+            <widget class="QLabel" name="lbl_A_y">
+             <property name="text">
+              <string>A y:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="LE_A_y"/>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QGroupBox" name="groupBox_B">
+        <property name="title">
+         <string>B point</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="B_x_layout">
+           <item>
+            <widget class="QLabel" name="lbl_B_x">
+             <property name="text">
+              <string>B x:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="LE_B_x"/>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="B_y_layout">
+           <item>
+            <widget class="QLabel" name="lbl_B_y">
+             <property name="text">
+              <string>B y:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="LE_B_y"/>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="C_horizontalLayout">
+        <item>
+         <spacer name="C_horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>37</width>
+            <height>17</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_C">
+          <property name="title">
+           <string>C point</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="C_x_layout">
+             <item>
+              <widget class="QLabel" name="lbl_C_x">
+               <property name="text">
+                <string>C x:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="LE_C_x"/>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="C_y_layout">
+             <item>
+              <widget class="QLabel" name="lbl_C_y">
+               <property name="text">
+                <string>C y:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="LE_C_y"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="C_horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QWidget" name="widget_radius" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QGridLayout" name="squareLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lbl_radius">
+        <property name="text">
+         <string>Radius:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="LE_radius"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="lout_params">
+     <item>
+      <widget class="QLabel" name="lbl_search_param">
+       <property name="text">
+        <string>Select search attribute:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="CB_search_param">
+       <property name="currentText">
+        <string>---Select Attribute---</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>---Select Attribute---</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>By central Point</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>By square</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="7" column="0">
+    <widget class="QWidget" name="widget_point" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QGridLayout" name="lout_point">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="x_layout">
+        <item>
+         <widget class="QLabel" name="lbl_x">
+          <property name="text">
+           <string>Central x:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="LE_x"/>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="y_layout">
+        <item>
+         <widget class="QLabel" name="lbl_y">
+          <property name="text">
+           <string>Central y:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="LE_y"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="lout_types">
+     <item>
+      <widget class="QLabel" name="lbl_figure_type">
+       <property name="text">
+        <string>Select figure type:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="CB_figure_type">
+       <property name="currentText">
+        <string>---Select Figure---</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>---Select Figure---</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Any</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Circle</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Triangle</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rectangle</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ellipse</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="0">
+    <widget class="QWidget" name="widget_square" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QGridLayout" name="squareLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lbl_square">
+        <property name="text">
+         <string>Square:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="LE_square"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <layout class="QHBoxLayout" name="lout_btns">
+     <item>
+      <widget class="QPushButton" name="btn_find">
+       <property name="text">
+        <string>Find</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_back">
+       <property name="text">
+        <string>Back</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <widget class="QWidget" name="widget_rect" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QWidget" name="widget_width" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="lbl_width">
+           <property name="text">
+            <string>Width: </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="LE_width"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QWidget" name="widget_height" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="lbl_height">
+           <property name="text">
+            <string>Height:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="LE_height"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btn_back</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog_FindFigure</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>278</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>200</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

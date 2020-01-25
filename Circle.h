@@ -3,7 +3,6 @@
 
 
 #include "Figure.h"
-//TODO: Circle needs to be derived of Ellipse
 class Circle : public Figure {
     double m_radius;
     std::string getTypeIdName() override;
@@ -24,6 +23,9 @@ public:
     void binary_load(std::ifstream&) override;
 
     friend std::ostream& operator<<(std::ostream&, const Circle&);
+	bool operator <(const Figure&) override;
+	bool operator >(const Figure&) override;
+	Circle& operator =(const Circle&);
 };
 
 

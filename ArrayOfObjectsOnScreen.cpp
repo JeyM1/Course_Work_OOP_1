@@ -75,12 +75,16 @@ void ArrayOfObjectsOnScreen::binary_save(std::ofstream& stream) {
 void ArrayOfObjectsOnScreen::binary_load(std::ifstream& stream) {
     size_t nameLength = 0;
     stream.read((char*)&(nameLength), sizeof(size_t));
+    if(nameLength > 64){
+        throw WrongInputFileException();
+    }
     char* name = new char[nameLength];
     stream.read(name, nameLength * sizeof(char));
     if (strcmp(name, typeid(ArrayOfObjectsOnScreen).name()) != 0) {
         throw WrongInputFileException();
     }
     delete[] name;
+    this->clear();
     Point::binary_load(stream);
     size_t list_size = 0;
     stream.read((char*)&list_size, sizeof(size_t));
@@ -148,6 +152,10 @@ std::ostream &operator<<(std::ostream& out, ArrayOfObjectsOnScreen& obj) {
     return out;
 }
 
+void ArrayOfObjectsOnScreen::remove(int idx){
+    this->m_figures.pop(idx);
+}
+
 void ArrayOfObjectsOnScreen::clear() {
     this->m_figures = SL_List<Figure*>();
     this->x = 0;
@@ -155,6 +163,8 @@ void ArrayOfObjectsOnScreen::clear() {
 }
 
 Figure *ArrayOfObjectsOnScreen::operator[](int i) {
+	if(i < 0 || i >= m_figures.size())
+		throw IndexOutOfBoundsException();
     return m_figures[i];
 }
 
@@ -176,6 +186,7 @@ void ArrayOfObjectsOnScreen::text_load(std::ifstream& stream) {
     stream >> buf;
     size_t quantity = 0;
     if(buf == typeid(ArrayOfObjectsOnScreen).name()){
+        this->clear();
         stream >> quantity >> this->x >> this->y;
         for(int i = 0; i < quantity; i++){
             buf.clear();
@@ -194,5 +205,61 @@ void ArrayOfObjectsOnScreen::text_load(std::ifstream& stream) {
             this->m_figures.push_back(obj);
         }
     } else throw WrongInputFileException();
+}
+
+void ArrayOfObjectsOnScreen::sort_by_square(){
+    bool swapped;
+    for(int i = 0; i < m_figures.size() - 1; i++){
+        swapped = false;
+        for(int j = 0; j < (int)m_figures.size() - i - 1; j++){
+            if(*(m_figures[j]) > *(m_figures[j+1])) {
+                m_figures.swap(j, j + 1);
+                swapped = true;
+            }
+        }
+        if(!swapped){
+            break;
+        }
+	}
+}
+
+std::vector<int> ArrayOfObjectsOnScreen::find_by_point(Point point) {
+	std::vector<int> ret;
+	for(int i = 0; i < this->size(); i++){
+		Figure* curr = this->m_figures[i];
+		if(point == curr->getPoint())
+			ret.push_back(i);
+	}
+	return ret;
+}
+
+std::vector<int> ArrayOfObjectsOnScreen::find_by_square(double square) {
+	std::vector<int> ret;
+	for(int i = 0; i < this->size(); i++){
+		Figure* curr = this->m_figures[i];
+		if(square == curr->getSquare())
+			ret.push_back(i);
+	}
+	return ret;
+}
+
+std::vector<int> ArrayOfObjectsOnScreen::find_by_point(Point point, FigureName::e_FigureNames fig_name) {
+	std::vector<int> ret;
+	for(int i = 0; i < this->size(); i++){
+		Figure* curr = this->m_figures[i];
+		if(point == curr->getPoint() && curr->getFigureName() == fig_name)
+			ret.push_back(i);
+	}
+	return ret;
+}
+
+std::vector<int> ArrayOfObjectsOnScreen::find_by_square(double square, FigureName::e_FigureNames fig_name) {
+	std::vector<int> ret;
+	for(int i = 0; i < this->size(); i++){
+		Figure* curr = this->m_figures[i];
+		if(square == curr->getSquare() && curr->getFigureName() == fig_name)
+			ret.push_back(i);
+	}
+	return ret;
 }
 

@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_EditFigures</class>
+ <widget class="QDialog" name="Dialog_EditFigures">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Edit figures</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="3">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QGroupBox" name="groupCircle">
+       <property name="title">
+        <string>Circle</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="lbl_circle_avg_point">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Average point: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_circle_avg_square">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Average square: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableCircle">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::DoubleClicked</set>
+          </property>
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Central x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Central y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Radius</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Action</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupTriangle">
+       <property name="title">
+        <string>Triangle</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="lbl_triangle_avg_point">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Average point: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_triangle_avg_square">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Average square: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableTriangle">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::DoubleClicked</set>
+          </property>
+          <property name="columnCount">
+           <number>8</number>
+          </property>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>A_x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>A_y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>B_x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>B_y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>C_x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>C_y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Action</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="btn_remove_all">
+     <property name="text">
+      <string>Remove all</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="3">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QGroupBox" name="groupRect">
+       <property name="title">
+        <string>Rectangle</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QLabel" name="lbl_rect_avg_point">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Average point: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_rect_avg_square">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Average square: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableRect">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::DoubleClicked</set>
+          </property>
+          <property name="columnCount">
+           <number>6</number>
+          </property>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Central x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Central y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Width</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Height</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Action</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupEllipse">
+       <property name="title">
+        <string>Ellipse</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLabel" name="lbl_ellipse_avg_point">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Average point: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_ellipse_avg_square">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Average square: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableEllipse">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>300</height>
+           </size>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::DoubleClicked</set>
+          </property>
+          <property name="columnCount">
+           <number>6</number>
+          </property>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Central x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Central y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Horizontal Radius</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Vertical Radius</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Action</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="2">
+    <widget class="QPushButton" name="btn_back">
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="btn_find">
+     <property name="text">
+      <string>Find figure</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btn_back</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog_EditFigures</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>147</x>
+     <y>248</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>102</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

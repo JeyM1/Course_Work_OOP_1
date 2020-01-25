@@ -16,14 +16,8 @@ Figure::Figure(FigureName::e_FigureNames name, double square) : FigureName(name)
 Figure::~Figure() = default;
 
 double Figure::getSquare() const { return m_square; }
-void Figure::setSquare(double mSquare) { m_square = mSquare; }
 Point Figure::getPoint() {
     return Point(this->x, this->y);
-}
-
-std::ostream &operator<<(std::ostream& out, const Figure& obj) {
-    out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name();
-    return out;
 }
 
 void Figure::binary_save(std::ofstream& stream) {
@@ -76,11 +70,22 @@ std::string Figure::getTypeIdName() {
 }
 
 
+std::ostream& operator <<(std::ostream& out, const Figure& obj) {
+	out << obj.x << " " << obj.y << " " << obj.m_square << " "  << obj.name();
+	return out;
+}
 
+bool Figure::operator <(const Figure& obj) {
+    return this->m_square < obj.m_square;
+}
 
+bool Figure::operator >(const Figure& obj) {
+    return this->m_square > obj.m_square;
+}
 
-
-
-
-
-
+Figure& Figure::operator =(const Figure& obj) {
+	Point::operator=(obj);
+	this->m_square = obj.m_square;
+	this->m_figure_name = obj.m_figure_name;
+	return *this;
+}

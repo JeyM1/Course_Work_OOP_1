@@ -8,6 +8,8 @@
 #include "Rectangle.h"
 #include "Triangle.h"
 #include "Circle.h"
+#include <map>
+#include <vector>
 
 class ArrayOfObjectsOnScreen : public Point {
     SL_List<Figure*> m_figures;
@@ -18,6 +20,7 @@ public:
     explicit ArrayOfObjectsOnScreen(SL_List<Figure*>&);
     void add(int idx, Figure*);
     void add(Figure*);
+    void remove(int idx);
     void clear();
     size_t size();
     double calculateAverageSquare(FigureName::e_FigureNames name = FigureName::Figure);
@@ -28,6 +31,12 @@ public:
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
     void add_load_type(FileHandler*(*callback)(std::string));
+    void sort_by_square();
+
+	std::vector<int> find_by_point(Point);
+	std::vector<int> find_by_square(double);
+	std::vector<int> find_by_point(Point, FigureName::e_FigureNames);
+	std::vector<int> find_by_square(double, FigureName::e_FigureNames);
 
     friend std::ostream& operator<<(std::ostream&, ArrayOfObjectsOnScreen&);
     Figure*operator[](int i);

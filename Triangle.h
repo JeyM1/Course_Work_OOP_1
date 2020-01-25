@@ -16,6 +16,9 @@ public:
         friend std::ostream& operator<<(std::ostream& out, const Points& obj){
             return out << obj.A << " " << obj.B << " " << obj.C;
         }
+		bool operator ==(const Points& obj){
+			return (A == obj.A) && (B == obj.B) && (C == obj.C);
+		}
     };
 protected:
     std::string getTypeIdName() override;
@@ -26,7 +29,9 @@ public:
     ~Triangle() override;
 
     Points getPoints() const;
+    Points& getrPoints();
     void setPoints(const Points& points);
+    void recalculateSquare();
 
     void text_save(std::ofstream&) override;
     void text_load(std::ifstream&) override;
@@ -34,6 +39,9 @@ public:
     void binary_load(std::ifstream&) override;
 
     friend std::ostream& operator<<(std::ostream&, const Triangle&);
+	bool operator <(const Figure&) override;
+	bool operator >(const Figure&) override;
+	Triangle& operator =(const Triangle&);
 };
 
 

@@ -12,7 +12,3 @@ const char *FigureName::name() const {
 FigureName::e_FigureNames FigureName::getFigureName() const {
     return m_figure_name;
 }
-
-void FigureName::setFigureName(FigureName::e_FigureNames mFigureName) {
-    m_figure_name = mFigureName;
-}

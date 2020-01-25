@@ -24,8 +24,7 @@ public:
     ~Figure() override;
 
     double getSquare() const;
-    Point getPoint();
-    void setSquare(double mSquare);
+	Point getPoint();
     virtual std::string getTypeIdName();
 
     void text_save(std::ofstream&) override;
@@ -33,7 +32,10 @@ public:
     void binary_save(std::ofstream&) override;
     void binary_load(std::ifstream&) override;
 
+	virtual bool operator <(const Figure&);
+	virtual bool operator >(const Figure&);
     friend std::ostream& operator<<(std::ostream&, const Figure&);
+	Figure& operator =(const Figure&);
 };
 
 

@@ -39,18 +39,23 @@ public:
 
 template<class T>
 SL_List<T>::SL_List(SL_List<T>& obj) : length(obj.length) {
-    SL_List<T> ret;
-    head = new SL_List_Node<T>;
-    head->data = obj.head->data;
-    SL_List_Node<T>* tmp1 = this->head;
-    SL_List_Node<T>* tmp2 = obj.head;
-    for(int i = 1; i < obj.length; i++){
-        tmp1->next = new SL_List_Node<T>;
-        tmp1->next->data = tmp2->next->data;
-        tmp1 = tmp1->next;
-        tmp2 = tmp2->next;
+    if(obj.length != 0){
+        SL_List<T> ret;
+        head = new SL_List_Node<T>;
+        head->data = obj.head->data;
+        SL_List_Node<T>* tmp1 = this->head;
+        SL_List_Node<T>* tmp2 = obj.head;
+        for(int i = 1; i < obj.length; i++){
+            tmp1->next = new SL_List_Node<T>;
+            tmp1->next->data = tmp2->next->data;
+            tmp1 = tmp1->next;
+            tmp2 = tmp2->next;
+        }
+        tail = tmp1;
+    } else {
+        this->head = nullptr;
+        this->tail = nullptr;
     }
-    tail = tmp1;
 }
 
 template<class T>
@@ -193,7 +198,6 @@ void SL_List<T>::bubble_sort() {
         swapped = false;
         for(int j = 0; j < length - i - 1; j++){
             if(getNode(j)->data > getNode(j+1)->data) {
-
                 swap(j, j + 1);
                 swapped = true;
             }
